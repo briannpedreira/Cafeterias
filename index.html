@@ -1,0 +1,3334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Nuestro Diario de Cafeterías · Brian & Rocío</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0a0d24;
+  --night-2:#10142e;
+  --night-3:#171c3d;
+  --line:rgba(177,140,255,.16);
+  --violet:#b18cff;
+  --magenta:#f06fc8;
+  --mint:#3ee6c4;
+  --mint-deep:#17b99a;
+  --ink:#eef0ff;
+  --muted:#9aa0c9;
+  --danger:#ff6b8b;
+  --r-lg:24px;
+  --r-md:16px;
+  --r-sm:10px;
+  --shadow:0 18px 50px rgba(3,5,20,.55);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"DM Sans",system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(177,140,255,.14), transparent 60%),
+    radial-gradient(900px 500px at -10% 15%, rgba(62,230,196,.10), transparent 55%),
+    var(--night);
+  color:var(--ink);
+  min-height:100vh;
+  line-height:1.5;
+}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit;color:var(--ink)}
+::selection{background:rgba(62,230,196,.35)}
+img{display:block;max-width:100%}
+
+/* ---------- HERO / AURORA ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  padding:clamp(28px,6vw,64px) 20px clamp(56px,8vw,84px);
+  border-bottom:1px solid var(--line);isolation:isolate;
+}
+.aurora{position:absolute;inset:-40% -20% auto;height:130%;z-index:-2;filter:blur(48px);opacity:.85;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;mix-blend-mode:screen}
+.aurora .a1{width:55vw;height:44vh;left:-8%;top:6%;background:radial-gradient(closest-side,rgba(177,140,255,.55),transparent 70%);animation:drift 14s ease-in-out infinite alternate}
+.aurora .a2{width:48vw;height:40vh;right:-6%;top:-4%;background:radial-gradient(closest-side,rgba(62,230,196,.42),transparent 70%);animation:drift 18s ease-in-out infinite alternate-reverse}
+.aurora .a3{width:40vw;height:36vh;left:32%;top:16%;background:radial-gradient(closest-side,rgba(240,111,200,.38),transparent 70%);animation:drift 22s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(4%,6%,0) scale(1.08)}}
+.stars-bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.stars-bg i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.7;animation:twinkle 3.4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:.85;transform:scale(1)}}
+.pines{position:absolute;left:0;right:0;bottom:-2px;z-index:-1;width:100%;height:clamp(60px,10vw,110px);display:block}
+@media (prefers-reduced-motion:reduce){.aurora span,.stars-bg i{animation:none}}
+.hero-inner{max-width:1080px;margin:0 auto;position:relative}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--mint);font-weight:700;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--mint)}
+h1{
+  font-family:"Fraunces",serif;font-weight:800;
+  font-size:clamp(34px,6.4vw,64px);line-height:1.04;letter-spacing:-.02em;max-width:16ch;
+}
+h1 .g{color:var(--mint)}
+h1 em.hand{font-family:"Caveat",cursive;font-style:normal;font-size:.8em;color:var(--muted);vertical-align:6%}
+.tagline{
+  font-family:"Caveat",cursive;font-size:clamp(19px,2.6vw,25px);color:var(--violet);
+  margin-top:10px;opacity:.9;
+}
+.tagline b{color:var(--mint);font-weight:600}
+h1 .v{background:linear-gradient(90deg,var(--violet),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{color:var(--muted);margin-top:14px;max-width:52ch;font-size:clamp(14px,1.6vw,16px)}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.stat{
+  background:rgba(16,20,46,.66);border:1px solid var(--line);border-radius:var(--r-md);
+  padding:10px 16px;backdrop-filter:blur(6px);min-width:110px;
+}
+.stat b{font-family:"Fraunces",serif;font-size:22px;display:block;color:var(--ink)}
+.stat span{font-size:12px;color:var(--muted)}
+.stat b em{font-style:normal;color:var(--mint);font-size:14px}
+
+/* ---------- TAZA HUMEANTE ---------- */
+.cup{
+  position:absolute;right:clamp(4px,4vw,60px);bottom:clamp(46px,7vw,80px);
+  width:clamp(74px,10vw,116px);opacity:.95;pointer-events:none;
+  filter:drop-shadow(0 10px 30px rgba(62,230,196,.18));
+  animation:cupFloat 5.5s ease-in-out infinite;
+}
+@keyframes cupFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.steam{position:absolute;left:50%;top:-6%;width:60%;height:60%;transform:translateX(-50%)}
+.steam i{
+  position:absolute;bottom:0;width:7px;height:34px;border-radius:8px;
+  background:linear-gradient(to top, rgba(238,240,255,.0), rgba(238,240,255,.55), rgba(62,230,196,.0));
+  filter:blur(3px);opacity:0;animation:steamUp 3.2s ease-in-out infinite;
+}
+.steam i:nth-child(1){left:14%;animation-delay:0s}
+.steam i:nth-child(2){left:46%;animation-delay:1.1s;height:44px}
+.steam i:nth-child(3){left:74%;animation-delay:2.1s}
+@keyframes steamUp{
+  0%{transform:translateY(6px) scaleY(.6);opacity:0}
+  25%{opacity:.8}
+  70%{opacity:.35}
+  100%{transform:translateY(-42px) scaleY(1.25) translateX(6px);opacity:0}
+}
+@media (max-width:600px){.cup{display:none}}
+
+/* ---------- LUCIÉRNAGAS ---------- */
+.fireflies{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.fireflies i{
+  position:absolute;width:5px;height:5px;border-radius:50%;
+  background:radial-gradient(circle, rgba(62,230,196,.95), rgba(62,230,196,0) 70%);
+  box-shadow:0 0 12px 3px rgba(62,230,196,.35);
+  opacity:0;
+  animation:fly var(--d,16s) linear var(--dl,0s) infinite, flick 3.1s ease-in-out var(--dl,0s) infinite;
+}
+.fireflies i.v{background:radial-gradient(circle, rgba(177,140,255,.95), rgba(177,140,255,0) 70%);box-shadow:0 0 12px 3px rgba(177,140,255,.3)}
+.fireflies i.m{background:radial-gradient(circle, rgba(240,111,200,.9), rgba(240,111,200,0) 70%);box-shadow:0 0 12px 3px rgba(240,111,200,.28)}
+@keyframes fly{
+  0%{transform:translate(0,0)}
+  25%{transform:translate(var(--x1,40px), var(--y1,-60px))}
+  50%{transform:translate(var(--x2,-30px), var(--y2,-120px))}
+  75%{transform:translate(var(--x3,50px), var(--y3,-60px))}
+  100%{transform:translate(0,0)}
+}
+@keyframes flick{0%,100%{opacity:.08}50%{opacity:.75}}
+@media (prefers-reduced-motion:reduce){.fireflies,.cup .steam,.cup{display:none}}
+
+/* ---------- DESTACADOS ---------- */
+.hl-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.hl{
+  display:flex;align-items:center;gap:12px;
+  background:linear-gradient(150deg,rgba(23,28,61,.85),rgba(16,20,46,.85));
+  border:1px solid var(--line);border-radius:var(--r-md);padding:13px 16px;
+  position:relative;overflow:hidden;
+}
+.hl::after{
+  content:"";position:absolute;top:0;left:-80%;width:60%;height:100%;
+  background:linear-gradient(105deg,transparent,rgba(238,240,255,.06),transparent);
+  animation:sheen 6s ease-in-out infinite;
+}
+.hl:nth-child(2)::after{animation-delay:2s}
+.hl:nth-child(3)::after{animation-delay:4s}
+@keyframes sheen{0%,55%{left:-80%}75%{left:110%}100%{left:110%}}
+@media (prefers-reduced-motion:reduce){.hl::after{animation:none}}
+.hl .ic{font-size:22px;flex:none}
+.hl b{font-family:"Fraunces",serif;font-size:15px;display:block;line-height:1.2}
+.hl span{font-size:12px;color:var(--muted)}
+.hl button{
+  margin-left:auto;flex:none;border:none;background:rgba(62,230,196,.12);color:var(--mint);
+  border:1px solid rgba(62,230,196,.3);border-radius:10px;padding:6px 11px;font-weight:700;font-size:12px;
+}
+
+/* ---------- LAYOUT ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding:26px 20px 90px}
+.toolbar{
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  margin:-46px 0 18px;position:relative;z-index:2;
+}
+.search:focus-within{border-color:rgba(62,230,196,.5);box-shadow:0 0 0 3px rgba(62,230,196,.12), var(--shadow)}
+.search{transition:border-color .2s, box-shadow .2s;
+  flex:1;min-width:180px;display:flex;align-items:center;gap:10px;
+  background:var(--night-2);border:1px solid var(--line);border-radius:14px;
+  padding:12px 14px;box-shadow:var(--shadow);
+}
+.search svg{flex:none;opacity:.6}
+.search input{background:none;border:none;outline:none;width:100%;font-size:15px}
+.search input::placeholder{color:var(--muted)}
+select.sort{
+  background:var(--night-2);border:1px solid var(--line);border-radius:14px;
+  padding:12px 14px;font-size:14px;outline:none;box-shadow:var(--shadow);
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa0c9' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;
+}
+.btn{
+  border:none;border-radius:14px;padding:12px 20px;font-weight:700;font-size:15px;
+  display:inline-flex;align-items:center;gap:8px;transition:transform .15s ease,box-shadow .15s ease,filter .15s ease;
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{
+  background:linear-gradient(135deg,var(--mint) 0%,var(--mint-deep) 100%);
+  color:#05231c;box-shadow:0 8px 26px rgba(62,230,196,.32);
+}
+.btn-primary:hover{filter:brightness(1.08);box-shadow:0 8px 32px rgba(62,230,196,.5)}
+.btn-primary{transition:transform .15s ease,box-shadow .25s ease,filter .15s ease}
+.btn-ghost{background:var(--night-3);color:var(--ink);border:1px solid var(--line)}
+.btn-danger{background:rgba(255,107,139,.12);color:var(--danger);border:1px solid rgba(255,107,139,.3)}
+.btn:focus-visible,.star:focus-visible,.search input:focus-visible,select:focus-visible,
+textarea:focus-visible,input:focus-visible,.tab:focus-visible,.seg button:focus-visible,
+.thumb button:focus-visible,.pin:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+
+/* segmented Lista/Mapa/Wishlist + ruleta */
+.seg-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+.seg{
+  display:flex;gap:5px;background:var(--night-2);border:1px solid var(--line);
+  border-radius:14px;padding:5px;box-shadow:var(--shadow);width:max-content;
+}
+.seg button{
+  border:none;background:none;color:var(--muted);font-weight:700;font-size:14px;
+  padding:9px 18px;border-radius:10px;display:flex;align-items:center;gap:7px;transition:all .15s;
+}
+.seg button.on{
+  background:linear-gradient(135deg,rgba(62,230,196,.2),rgba(177,140,255,.14));
+  color:var(--ink);box-shadow:inset 0 0 0 1px rgba(62,230,196,.35);
+}
+
+/* ---------- GRID DE CARDS ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{
+  background:linear-gradient(160deg,var(--night-2),#0d1130 70%);
+  border:1px solid var(--line);border-radius:var(--r-lg);padding:0;
+  position:relative;overflow:hidden;box-shadow:var(--shadow);
+  transition:transform .18s ease,border-color .18s ease;
+  display:flex;flex-direction:column;
+}
+.card{animation:cardIn .55s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--i,0)*70ms)}
+@keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media (prefers-reduced-motion:reduce){.card{animation:none}}
+.card:hover{
+  transform:translateY(-4px);border-color:rgba(62,230,196,.45);
+  box-shadow:0 18px 50px rgba(3,5,20,.55), 0 0 28px rgba(62,230,196,.14);
+}
+.cover{transition:transform .5s ease}
+.card:hover .cover{transform:scale(1.045)}
+.card-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:13px;flex:1;position:relative}
+.card-body::after{
+  content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(177,140,255,.18),transparent 70%);pointer-events:none;
+}
+.cover{
+  width:100%;height:150px;object-fit:cover;
+  border-bottom:1px solid var(--line);
+  -webkit-mask-image:linear-gradient(#000 78%,rgba(0,0,0,.55));mask-image:linear-gradient(#000 78%,rgba(0,0,0,.55));
+}
+.card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.card h3{font-family:"Fraunces",serif;font-size:20px;font-weight:700;letter-spacing:-.01em}
+.card .meta{color:var(--muted);font-size:13px;margin-top:2px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip-visitas{
+  font-size:11px;font-weight:800;color:var(--violet);
+  background:rgba(177,140,255,.12);border:1px solid rgba(177,140,255,.3);
+  border-radius:20px;padding:2px 9px;letter-spacing:.02em;
+}
+.badge-avg{
+  flex:none;font-family:"Fraunces",serif;font-weight:800;font-size:18px;
+  background:rgba(62,230,196,.12);color:var(--mint);border:1px solid rgba(62,230,196,.3);
+  border-radius:12px;padding:6px 11px;display:flex;align-items:center;gap:5px;
+}
+.badge-avg svg{width:14px;height:14px}
+.mini-rows{display:flex;flex-direction:column;gap:8px}
+.mini-row{display:flex;align-items:center;gap:10px;font-size:13px}
+.who{
+  flex:none;width:26px;height:26px;border-radius:50%;
+  display:grid;place-items:center;font-weight:800;font-size:12px;font-family:"Fraunces",serif;
+}
+.who.b{background:rgba(62,230,196,.16);color:var(--mint);border:1px solid rgba(62,230,196,.35)}
+.who.r{background:rgba(240,111,200,.14);color:var(--magenta);border:1px solid rgba(240,111,200,.35)}
+.mini-stars{display:flex;gap:2px}
+.mini-stars svg{width:14px;height:14px}
+.mini-val{color:var(--muted);font-size:12px;margin-left:auto}
+.pedido-chip{
+  font-size:13px;color:var(--muted);
+  background:rgba(177,140,255,.08);border:1px solid var(--line);
+  border-radius:var(--r-sm);padding:9px 12px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.pedido-chip b{color:var(--violet);font-weight:700}
+.card-actions{display:flex;gap:8px;margin-top:auto}
+.card-actions .btn{padding:9px 12px;font-size:13px;border-radius:11px;flex:1;justify-content:center}
+.card-actions .btn.gmaps{flex:none}
+
+/* ---------- MAPA DE BUENOS AIRES ---------- */
+.mapview{display:none}
+.mapview.on{display:block}
+.listview{display:block}
+.listview.off{display:none}
+.starmap{
+  position:relative;height:min(66vh,560px);min-height:400px;
+  border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;
+  background:
+    radial-gradient(700px 340px at 20% 10%, rgba(177,140,255,.16), transparent 60%),
+    radial-gradient(600px 300px at 85% 30%, rgba(62,230,196,.10), transparent 60%),
+    radial-gradient(500px 320px at 55% 90%, rgba(240,111,200,.10), transparent 60%),
+    #090c22;
+  box-shadow:var(--shadow);
+}
+.starmap svg.svghide{display:none !important}
+.starmap svg{display:block;width:100%;height:100%;touch-action:none;cursor:grab;user-select:none}
+.starmap svg.dragging{cursor:grabbing}
+.map-mode{
+  position:absolute;top:12px;left:12px;z-index:3;display:flex;gap:4px;
+  background:rgba(16,20,46,.85);border:1px solid var(--line);border-radius:12px;padding:4px;
+  backdrop-filter:blur(4px);
+}
+.map-mode button{
+  border:none;background:none;color:var(--muted);font-weight:700;font-size:12px;
+  padding:7px 12px;border-radius:9px;transition:all .15s;
+}
+.map-mode button.on{
+  background:linear-gradient(135deg,rgba(62,230,196,.2),rgba(177,140,255,.14));
+  color:var(--ink);box-shadow:inset 0 0 0 1px rgba(62,230,196,.35);
+}
+.b-label.prov{fill:rgba(62,230,196,.62)}
+.prov-shape{fill:rgba(177,140,255,.05);stroke:rgba(177,140,255,.3);stroke-width:1.4}
+.amba-marker{cursor:pointer}
+.amba-marker .am-star{filter:drop-shadow(0 0 10px rgba(240,111,200,.7))}
+.amba-marker text{fill:#eef0ff;font-weight:800;font-size:var(--pl,14px);paint-order:stroke;stroke:#090c22;stroke-width:.3em}
+.amba-marker .am-sub{fill:rgba(240,111,200,.9);font-weight:700}
+.zoom-ctrl{
+  position:absolute;right:12px;bottom:12px;z-index:3;display:flex;flex-direction:column;gap:6px;
+}
+.zoom-ctrl button{
+  width:38px;height:38px;border-radius:11px;border:1px solid var(--line);
+  background:rgba(16,20,46,.85);color:var(--ink);font-size:17px;font-weight:700;line-height:1;
+  backdrop-filter:blur(4px);
+}
+.zoom-ctrl button:hover{border-color:rgba(62,230,196,.45);color:var(--mint)}
+/* capas svg */
+.water{fill:url(#waterGrad)}
+.water-lbl{fill:rgba(62,230,196,.4);font-size:15px;letter-spacing:.35em;font-style:italic}
+.caba-shape{fill:rgba(177,140,255,.08);stroke:rgba(177,140,255,.42);stroke-width:1.6}
+.b-dot{fill:rgba(154,160,201,.5)}
+.b-label{fill:rgba(154,160,201,.8);font-size:var(--bl,12px);font-weight:600;paint-order:stroke;stroke:#090c22;stroke-width:.35em;transition:opacity .25s}
+.b-label.gba{fill:rgba(62,230,196,.6);font-style:italic}
+.b-label.has{fill:#eef0ff;font-weight:800}
+.b-label.hid{opacity:0;pointer-events:none}
+.pin{cursor:pointer}
+.pin .halo{opacity:.55}
+.pin .pin-lbl{fill:#eef0ff;font-size:var(--pl,13px);font-weight:800;paint-order:stroke;stroke:#090c22;stroke-width:.3em}
+.map-pop{
+  position:absolute;z-index:5;width:230px;
+  background:linear-gradient(170deg,#161b3e,var(--night-2));
+  border:1px solid rgba(62,230,196,.35);border-radius:var(--r-md);
+  padding:14px;box-shadow:0 14px 40px rgba(0,0,0,.6);
+  transform:translate(-50%,calc(-100% - 14px));
+}
+.map-pop h4{font-family:"Fraunces",serif;font-size:15px;margin-bottom:2px}
+.map-pop .sub{font-size:12px;color:var(--muted);margin-bottom:10px}
+.map-pop .row{display:flex;gap:7px}
+.map-pop .btn{flex:1;padding:8px 10px;font-size:12px;border-radius:10px;justify-content:center;text-decoration:none}
+a.btn{text-decoration:none}
+.map-note{
+  margin-top:14px;color:var(--muted);font-size:13px;
+  background:rgba(16,20,46,.5);border:1px dashed var(--line);border-radius:var(--r-md);padding:12px 16px;
+}
+.map-note b{color:var(--mint)}
+.nocoords{margin-top:14px}
+.nocoords h4{font-family:"Fraunces",serif;font-size:14px;color:var(--muted);margin-bottom:8px}
+.nocoords .tags{display:flex;gap:8px;flex-wrap:wrap}
+.nocoords button{
+  background:var(--night-3);border:1px solid var(--line);color:var(--ink);
+  border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600;
+}
+
+.seg .n{
+  font-size:10px;font-weight:800;background:rgba(240,111,200,.18);color:var(--magenta);
+  border-radius:10px;padding:1px 6px;margin-left:2px;
+}
+.btn-ruleta{
+  margin-left:auto;
+  background:linear-gradient(135deg,rgba(240,111,200,.22),rgba(177,140,255,.2));
+  color:var(--ink);border:1px solid rgba(240,111,200,.4);
+  box-shadow:0 8px 26px rgba(240,111,200,.18);
+}
+.btn-ruleta:hover{filter:brightness(1.12)}
+.btn-music{
+  background:var(--night-2);border:1px solid var(--line);color:var(--muted);
+  border-radius:14px;width:47px;height:47px;padding:0;font-size:19px;
+  display:grid;place-items:center;box-shadow:var(--shadow);transition:all .2s;
+  position:relative;
+}
+.btn-music.on{
+  color:var(--mint);border-color:rgba(62,230,196,.5);
+  box-shadow:0 0 18px rgba(62,230,196,.28), var(--shadow);
+}
+.btn-music.on::after{
+  content:"";position:absolute;inset:-4px;border-radius:16px;
+  border:1px solid rgba(62,230,196,.35);animation:musicpulse 2.4s ease-out infinite;
+  pointer-events:none;
+}
+@keyframes musicpulse{0%{transform:scale(.92);opacity:.8}100%{transform:scale(1.15);opacity:0}}
+@media (prefers-reduced-motion:reduce){.btn-music.on::after{animation:none;opacity:.3}}
+.topbar{
+  position:fixed;top:12px;right:12px;z-index:46;display:flex;gap:8px;
+}
+.topbar .btn-music{box-shadow:0 6px 24px rgba(3,5,20,.6)}
+.music-wrap{position:relative}
+.music-menu[hidden]{display:none !important}
+.music-menu{
+  position:absolute;right:0;top:calc(100% + 8px);z-index:40;
+  background:linear-gradient(170deg,#161b3e,var(--night-2));
+  border:1px solid var(--line);border-radius:var(--r-md);
+  padding:6px;min-width:220px;box-shadow:0 14px 40px rgba(0,0,0,.55);
+  display:flex;flex-direction:column;gap:3px;
+}
+.music-menu button{
+  background:none;border:none;color:var(--muted);text-align:left;
+  padding:10px 12px;border-radius:10px;font-weight:700;font-size:14px;
+  display:flex;align-items:center;gap:9px;transition:all .13s;
+}
+.music-menu button:hover{background:rgba(177,140,255,.1);color:var(--ink)}
+.music-menu button.on{
+  background:rgba(62,230,196,.13);color:var(--mint);
+  box-shadow:inset 0 0 0 1px rgba(62,230,196,.35);
+}
+
+/* ---------- WISHLIST ---------- */
+.wishview{display:none}
+.wishview.on{display:block}
+.wl-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.wl-top p{color:var(--muted);font-size:14px;max-width:46ch}
+.wl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.wl-card{
+  background:linear-gradient(160deg,rgba(240,111,200,.06),var(--night-2) 55%);
+  border:1px solid rgba(240,111,200,.22);border-radius:var(--r-md);
+  padding:16px 18px;display:flex;flex-direction:column;gap:9px;box-shadow:var(--shadow);
+  position:relative;overflow:hidden;
+}
+.wl-card::before{content:"💫";position:absolute;right:12px;top:10px;opacity:.5;font-size:15px}
+.wl-card h3{font-family:"Fraunces",serif;font-size:17px;letter-spacing:-.01em;padding-right:24px}
+.wl-card .meta{color:var(--muted);font-size:13px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chip-by{
+  font-size:11px;font-weight:800;border-radius:20px;padding:2px 9px;letter-spacing:.02em;
+}
+.chip-by.b{background:rgba(62,230,196,.14);color:var(--mint);border:1px solid rgba(62,230,196,.32)}
+.chip-by.r{background:rgba(240,111,200,.13);color:var(--magenta);border:1px solid rgba(240,111,200,.32)}
+.chip-by.a{background:rgba(177,140,255,.13);color:var(--violet);border:1px solid rgba(177,140,255,.32)}
+.wl-note{font-size:13px;color:var(--muted);font-style:italic}
+.wl-actions{display:flex;gap:8px;margin-top:auto}
+.wl-actions .btn{padding:8px 12px;font-size:13px;border-radius:11px;flex:1;justify-content:center}
+.wl-actions .btn-danger{flex:none}
+
+/* quién propone (radio chips en modal) */
+.by-picker{display:flex;gap:8px}
+.by-picker button{
+  flex:1;background:rgba(10,13,36,.5);border:1px solid var(--line);color:var(--muted);
+  border-radius:12px;padding:10px;font-weight:700;font-size:14px;transition:all .15s;
+}
+.by-picker button.on.b{background:rgba(62,230,196,.16);color:var(--mint);border-color:rgba(62,230,196,.45)}
+.by-picker button.on.r{background:rgba(240,111,200,.14);color:var(--magenta);border-color:rgba(240,111,200,.45)}
+.by-picker button.on.a{background:rgba(177,140,255,.14);color:var(--violet);border-color:rgba(177,140,255,.45)}
+
+/* ---------- RULETA ---------- */
+.ruleta-box{max-width:460px;border-radius:22px !important;text-align:center}
+.ruleta-box .modal-body{padding:26px 24px 10px}
+.ruleta-src{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0 4px}
+.ruleta-src button{
+  background:rgba(10,13,36,.5);border:1px solid var(--line);color:var(--muted);
+  border-radius:20px;padding:7px 13px;font-size:13px;font-weight:700;transition:all .15s;
+}
+.ruleta-src button.on{background:rgba(62,230,196,.15);color:var(--mint);border-color:rgba(62,230,196,.45)}
+.ruleta-stage{
+  margin:18px auto 6px;min-height:120px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+  border:1px solid var(--line);border-radius:var(--r-md);
+  background:radial-gradient(closest-side,rgba(177,140,255,.12),rgba(10,13,36,.6));
+  padding:18px 14px;width:100%;
+}
+.ruleta-name{
+  font-family:"Fraunces",serif;font-weight:800;font-size:clamp(20px,5.6vw,26px);
+  letter-spacing:-.01em;line-height:1.15;
+}
+.ruleta-stage.spinning .ruleta-name{opacity:.75;filter:blur(.4px)}
+.ruleta-stage.done .ruleta-name{
+  background:linear-gradient(90deg,var(--mint),var(--violet),var(--magenta));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:pop .4s cubic-bezier(.2,1.4,.4,1);
+}
+@keyframes pop{from{transform:scale(.8)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.ruleta-stage.done .ruleta-name{animation:none}}
+.ruleta-sub{font-size:13px;color:var(--muted)}
+.ruleta-empty{font-size:14px;color:var(--muted)}
+.ruleta-actions{display:flex;gap:8px;margin-top:14px}
+.ruleta-actions .btn{flex:1;justify-content:center;padding:10px 12px;font-size:13px;border-radius:12px;text-decoration:none}
+
+/* ---------- EMPTY STATE ---------- */
+.empty{
+  text-align:center;padding:70px 20px;border:1px dashed var(--line);border-radius:var(--r-lg);
+  background:rgba(16,20,46,.4);
+}
+.empty .cup{font-size:44px;margin-bottom:10px}
+.empty h2{font-family:"Fraunces",serif;font-size:22px;margin-bottom:6px}
+.empty p{color:var(--muted);max-width:40ch;margin:0 auto 20px}
+
+/* ---------- MODAL ---------- */
+.overlay{
+  position:fixed;inset:0;background:rgba(4,6,20,.72);backdrop-filter:blur(5px);
+  display:none;align-items:flex-end;justify-content:center;z-index:50;
+}
+.overlay.open{display:flex}
+.modal{
+  background:linear-gradient(175deg,#141838,var(--night-2) 40%);
+  border:1px solid var(--line);width:100%;max-width:680px;
+  border-radius:26px 26px 0 0;max-height:92dvh;display:flex;flex-direction:column;
+  animation:up .28s cubic-bezier(.2,.9,.3,1);
+}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+@media (min-width:720px){
+  .overlay{align-items:center;padding:24px}
+  .modal{border-radius:26px;max-height:88vh}
+}
+@media (prefers-reduced-motion:reduce){.modal{animation:none}}
+.modal-head{
+  padding:20px 24px 14px;display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid var(--line);flex:none;
+}
+.modal-head h2{font-family:"Fraunces",serif;font-size:20px;letter-spacing:-.01em}
+.modal-head h2 span{color:var(--mint)}
+.x{
+  background:var(--night-3);border:1px solid var(--line);color:var(--muted);
+  width:34px;height:34px;border-radius:50%;font-size:16px;line-height:1;
+}
+.modal-body{padding:20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.field{margin-bottom:16px}
+.field label,.sec-label{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:7px}
+.field input,.field textarea{
+  width:100%;background:rgba(10,13,36,.6);border:1px solid var(--line);
+  border-radius:12px;padding:12px 14px;font-size:15px;outline:none;transition:border-color .15s;
+}
+.field input:focus,.field textarea:focus{border-color:rgba(62,230,196,.5)}
+.field textarea{resize:vertical;min-height:74px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:480px){.row2{grid-template-columns:1fr}}
+.hint{font-size:12px;color:var(--muted);margin-top:6px}
+
+/* ubicación */
+.geo-row{display:flex;gap:8px}
+.geo-row input{flex:1}
+.geo-row .btn{flex:none;padding:0 14px;border-radius:12px;font-size:18px}
+
+/* visitas */
+.visits{margin-bottom:18px}
+.visit-row{
+  display:flex;gap:8px;align-items:center;margin-bottom:8px;
+  background:rgba(10,13,36,.35);border:1px solid var(--line);border-radius:12px;padding:8px;
+}
+.visit-row input[type=date]{
+  flex:none;width:138px;background:rgba(10,13,36,.6);border:1px solid var(--line);
+  border-radius:9px;padding:8px 9px;font-size:13px;outline:none;
+}
+.visit-row input[type=text]{
+  flex:1;min-width:0;background:rgba(10,13,36,.6);border:1px solid var(--line);
+  border-radius:9px;padding:8px 11px;font-size:14px;outline:none;
+}
+.visit-row .rm{
+  flex:none;background:rgba(255,107,139,.1);border:1px solid rgba(255,107,139,.25);
+  color:var(--danger);width:30px;height:30px;border-radius:9px;font-size:13px;line-height:1;
+}
+.add-visit{
+  background:none;border:1px dashed rgba(62,230,196,.4);color:var(--mint);
+  border-radius:12px;padding:10px;width:100%;font-weight:700;font-size:13px;
+}
+@media (max-width:440px){
+  .visit-row{flex-wrap:wrap}
+  .visit-row input[type=date]{width:calc(100% - 40px)}
+  .visit-row input[type=text]{flex:1 1 100%;order:3}
+  .visit-row .rm{order:2}
+}
+
+/* fotos */
+.photos{margin-bottom:18px}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:8px;margin-bottom:8px}
+.thumb{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb button{
+  position:absolute;top:5px;right:5px;width:24px;height:24px;border-radius:50%;
+  background:rgba(4,6,20,.75);color:#fff;border:1px solid rgba(255,255,255,.25);
+  font-size:12px;line-height:1;
+}
+.add-photo{
+  border:1px dashed rgba(177,140,255,.45);border-radius:12px;background:none;color:var(--violet);
+  aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  font-weight:700;font-size:12px;width:100%;
+}
+.add-photo span{font-size:22px}
+.photo-status{font-size:12px;color:var(--muted)}
+
+/* tabs Brian / Rocío */
+.tabs{display:flex;gap:8px;margin:6px 0 16px;background:rgba(10,13,36,.5);padding:5px;border-radius:14px;border:1px solid var(--line)}
+.tab{flex:1;border:none;background:none;color:var(--muted);font-weight:700;font-size:14px;padding:10px;border-radius:10px;transition:all .15s}
+.tab.on-b{background:linear-gradient(135deg,rgba(62,230,196,.22),rgba(62,230,196,.1));color:var(--mint);box-shadow:inset 0 0 0 1px rgba(62,230,196,.4)}
+.tab.on-r{background:linear-gradient(135deg,rgba(240,111,200,.2),rgba(177,140,255,.12));color:var(--magenta);box-shadow:inset 0 0 0 1px rgba(240,111,200,.4)}
+
+.rate-block{
+  border:1px solid var(--line);border-radius:var(--r-md);
+  padding:14px;margin-bottom:12px;background:rgba(10,13,36,.35);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+}
+.rate-block .cat{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
+.cat .ico{font-size:17px}
+.starbar{display:flex;gap:4px}
+.star{background:none;border:none;padding:3px;line-height:0;border-radius:6px;transition:transform .12s ease}
+.star:hover{transform:scale(1.18)}
+.star svg{width:27px;height:27px;fill:none;stroke:var(--muted);stroke-width:1.6;transition:all .12s}
+.star.lit svg{fill:url(#gradStar);stroke:var(--mint);filter:drop-shadow(0 0 7px rgba(62,230,196,.6));animation:starpop .28s cubic-bezier(.2,1.6,.4,1)}
+@keyframes starpop{0%{transform:scale(.6) rotate(-14deg)}60%{transform:scale(1.22) rotate(6deg)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.star.lit svg{animation:none}}
+.tabpane[data-user="rocio"] .star.lit svg{stroke:var(--magenta);filter:drop-shadow(0 0 7px rgba(240,111,200,.6))}
+.modal-foot{
+  padding:16px 24px calc(16px + env(safe-area-inset-bottom));display:flex;gap:10px;
+  border-top:1px solid var(--line);flex:none;background:rgba(10,13,36,.4);
+  border-radius:0 0 26px 26px;
+}
+@media (max-width:719px){.modal-foot{border-radius:0}}
+.modal-foot .btn{flex:1;justify-content:center}
+
+/* ---------- TOAST ---------- */
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);
+  background:var(--night-3);border:1px solid rgba(62,230,196,.4);color:var(--ink);
+  padding:12px 20px;border-radius:14px;font-size:14px;font-weight:600;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);opacity:0;pointer-events:none;
+  transition:all .25s ease;z-index:80;max-width:90vw;text-align:center;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.confirm-box{max-width:420px;border-radius:22px !important;text-align:center}
+.confirm-box .modal-body{padding:28px 24px 8px}
+.confirm-box p{color:var(--muted);margin-top:8px;font-size:14px}
+
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 20px 34px}
+footer b{color:var(--violet)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="gradStar" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3ee6c4"/>
+      <stop offset="100%" stop-color="#b18cff"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="topbar">
+  <div class="music-wrap" id="musicWrap">
+    <button class="btn-music" id="btnMusic" title="Música" aria-label="Elegir música" aria-pressed="false" aria-haspopup="menu">🎵</button>
+    <div class="music-menu" id="musicMenu" hidden role="menu">
+      <button data-mode="ambient" role="menuitem">✨ Ambiente mágico</button>
+      <button data-mode="ballad" role="menuitem">🏮 Balada de los faroles</button>
+      <button data-mode="flamenco" role="menuitem">💃 Flamenco pop</button>
+      <button data-mode="piano" role="menuitem">🎹 Piano de medianoche</button>
+      <button data-mode="jazz" role="menuitem">🎷 Jazz de trasnoche</button>
+      <button data-mode="off" class="on" role="menuitem">🔇 Silencio</button>
+    </div>
+  </div>
+  <div class="music-wrap" id="dataWrap">
+    <button class="btn-music" id="btnData" title="Exportar y backup" aria-label="Exportar y backup" aria-haspopup="menu">💾</button>
+    <div class="music-menu" id="dataMenu" hidden role="menu">
+      <button id="btnExportCsv" role="menuitem">📊 Exportar a Excel (.xlsx)</button>
+      <button id="btnBackup" role="menuitem">🛟 Descargar backup completo</button>
+      <button id="btnRestoreAsk" role="menuitem">📥 Restaurar backup (archivo)</button>
+      <button id="btnPasteAsk" role="menuitem">📋 Importar pegando el texto</button>
+      <button id="btnCloudAsk" role="menuitem" hidden>☁️ Sincronización en la nube</button>
+    </div>
+    <input type="file" id="restoreInput" hidden>
+  </div>
+  <button class="btn-music" id="btnFull" title="Pantalla completa" aria-label="Pantalla completa">⛶</button>
+</div>
+<header class="hero">
+  <div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <div class="stars-bg" id="starsBg"></div>
+  <div class="hero-inner">
+    <h1><span class="v">Magia</span> <em class="hand">y</em> <span class="g">Café</span></h1>
+    <p class="tagline" id="tagline"></p>
+    <div class="hero-stats">
+      <div class="stat"><b id="stCount">0</b><span>cafeterías</span></div>
+      <div class="stat"><b id="stVisits">0</b><span>visitas totales</span></div>
+      <div class="stat"><b id="stAvg">—</b><span>promedio general</span></div>
+      <div class="stat"><b id="stBest">—</b><span>la favorita</span></div>
+      <div class="stat"><b id="stWish">0</b><span>por conocer</span></div>
+    </div>
+  </div>
+  <div class="cup" aria-hidden="true">
+    <div class="steam"><i></i><i></i><i></i></div>
+    <svg viewBox="0 0 100 78" width="100%">
+      <ellipse cx="46" cy="70" rx="34" ry="6" fill="rgba(3,5,20,.5)"/>
+      <path d="M14 26 h64 v22 a32 22 0 0 1 -64 0 z" fill="#171c3d" stroke="rgba(177,140,255,.5)" stroke-width="2"/>
+      <path d="M78 30 h7 a10 10 0 0 1 0 20 h-7" fill="none" stroke="rgba(177,140,255,.5)" stroke-width="2.5"/>
+      <ellipse cx="46" cy="26" rx="32" ry="7" fill="#0d1130" stroke="rgba(62,230,196,.55)" stroke-width="2"/>
+      <ellipse cx="46" cy="26" rx="24" ry="4.6" fill="#3b2a1e"/>
+      <path d="M32 25 q7 -4 14 0 q7 4 14 0" fill="none" stroke="rgba(238,240,255,.5)" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <svg class="pines" viewBox="0 0 1200 110" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#070a1c" d="M0,110 L0,70 L30,70 L55,30 L80,70 L100,70 L128,18 L156,70 L180,70 L205,42 L230,70 L260,70 L292,10 L324,70 L352,70 L375,45 L398,70 L430,70 L460,25 L490,70 L515,70 L545,38 L575,70 L610,70 L645,8 L680,70 L710,70 L735,44 L760,70 L790,70 L822,20 L854,70 L880,70 L905,48 L930,70 L960,70 L992,14 L1024,70 L1052,70 L1078,40 L1104,70 L1130,70 L1160,30 L1190,70 L1200,70 L1200,110 Z"/>
+  </svg>
+</header>
+
+<main class="wrap">
+  <div class="toolbar">
+    <div class="search">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Buscar cafetería…" aria-label="Buscar cafetería">
+    </div>
+    <select class="sort" id="sort" aria-label="Ordenar">
+      <option value="recent">Más recientes</option>
+      <option value="top">Mejor puntuadas</option>
+      <option value="visits">Más visitadas</option>
+      <option value="name">Por nombre (A–Z)</option>
+    </select>
+    <button class="btn btn-primary" id="btnNew">✦ Nueva cafetería</button>
+  </div>
+
+  <div class="seg-row">
+    <div class="seg" role="tablist" aria-label="Vista">
+      <button id="segList" class="on" role="tab" aria-selected="true">📖 Lista</button>
+      <button id="segMap" role="tab" aria-selected="false">🌌 Mapa</button>
+      <button id="segWish" role="tab" aria-selected="false">💫 Wishlist <span class="n" id="wishN">0</span></button>
+    </div>
+    <button class="btn btn-ruleta" id="btnRuleta" title="¿A dónde vamos hoy?">🎰 Ruleta</button>
+  </div>
+
+  <div class="listview" id="listView">
+    <div class="hl-row" id="hlRow" hidden></div>
+    <div id="grid" class="grid" aria-live="polite"></div>
+    <div id="empty" class="empty" hidden>
+      <div class="cup">☕</div>
+      <h2>Todavía no hay cafeterías</h2>
+      <p>Agregá la primera que visiten juntos y empiecen a puntuar. La lista se guarda sola para siempre.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-primary" id="btnEmptyNew">✦ Agregar la primera</button>
+        <button class="btn btn-ghost" id="btnEmptyImport">📥 Importar lo que ya teníamos</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mapview" id="mapView">
+    <div class="starmap" id="starmap">
+      <div class="map-mode" role="tablist" aria-label="Nivel del mapa">
+        <button id="mmAmba" class="on" role="tab" aria-selected="true">🏙 AMBA</button>
+        <button id="mmProv" role="tab" aria-selected="false">🗺 Provincia</button>
+      </div>
+      <div class="zoom-ctrl">
+        <button id="zIn" aria-label="Acercar">＋</button>
+        <button id="zOut" aria-label="Alejar">－</button>
+        <button id="zHome" aria-label="Vista completa">⌂</button>
+      </div>
+    </div>
+    <div class="map-note" id="mapNote"></div>
+    <div class="nocoords" id="fueraMapa" hidden>
+      <h4>🧳 Fuera del mapa — interior y otras ciudades (tocá para editar):</h4>
+      <div class="tags" id="fueraTags"></div>
+    </div>
+    <div class="nocoords" id="noCoords" hidden>
+      <h4>Sin barrio todavía (tocá para agregarlo):</h4>
+      <div class="tags" id="noCoordsTags"></div>
+    </div>
+  </div>
+
+  <div class="wishview" id="wishView">
+    <div class="wl-top">
+      <p>Las cafeterías que queremos conocer. Cuando la visiten, tocá <b style="color:var(--mint)">✨ La visitamos</b> y pasa a la lista con todo listo para puntuar.</p>
+      <button class="btn btn-primary" id="btnNewWish">💫 Agregar a la wishlist</button>
+    </div>
+    <div class="wl-grid" id="wlGrid"></div>
+    <div class="empty" id="wlEmpty" hidden>
+      <div class="cup">💫</div>
+      <h2>La wishlist está vacía</h2>
+      <p>Anotá acá esa cafetería que vieron en Instagram o que les recomendaron, y quién la propuso.</p>
+      <button class="btn btn-primary" id="btnEmptyWish">💫 Agregar la primera</button>
+    </div>
+  </div>
+</main>
+
+<footer>Hecho con ☕ y un poco de polvo de hadas · <b>Brian &amp; Rocío</b> · <span id="appVersion" style="opacity:.55">v19 — nube en tiempo real ☁️</span> <span id="webModeTag" style="opacity:.55" hidden>· 🌐 guardado en este dispositivo</span> <span id="cloudTag" style="opacity:.75" hidden>· ☁️ sincronizado en la nube</span></footer>
+
+<!-- MODAL FORM -->
+<div class="overlay" id="ovForm" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="formTitle">Nueva <span>cafetería</span></h2>
+      <button class="x" id="xForm" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="fName">Nombre de la cafetería *</label>
+        <input id="fName" type="text" placeholder="Ej: Santito Café" maxlength="60" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="fLoc">Barrio / zona</label>
+        <input id="fLoc" type="text" list="barriosList" placeholder="Ej: Palermo, Vicente López, Morón…" maxlength="50" autocomplete="off">
+        <div class="hint">Escribí el barrio (CABA o GBA) y la cafetería aparece sola en el mapa ✨. Si es del interior, poné la ciudad y va a la sección "fuera del mapa".</div>
+        <datalist id="barriosList"></datalist>
+      </div>
+
+      <div class="field">
+        <label for="fInsta">Instagram / Reel (link)</label>
+        <input id="fInsta" type="url" placeholder="https://www.instagram.com/reel/…" maxlength="300" autocomplete="off" inputmode="url">
+        <div class="hint">Pegá el link del perfil o del reel que los llevó hasta ahí. Aparece como 📸 en la card.</div>
+      </div>
+      <div class="visits">
+        <span class="sec-label">Visitas y qué pedimos</span>
+        <div id="visitRows"></div>
+        <button class="add-visit" id="btnAddVisit" type="button">➕ Agregar otra visita</button>
+      </div>
+
+      <div class="photos">
+        <span class="sec-label">Fotos (hasta 4)</span>
+        <div class="thumbs" id="thumbs"></div>
+        <div class="photo-status" id="photoStatus"></div>
+        <input type="file" id="fileInput" accept="image/*" multiple hidden>
+      </div>
+
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="btnCancel">Cancelar</button>
+      <button class="btn btn-primary" id="btnSave">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PUNTUAR -->
+<div class="overlay" id="ovRate" role="dialog" aria-modal="true" aria-labelledby="rateTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="rateTitle">Puntuar <span>cafetería</span></h2>
+      <button class="x" id="xRate" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="tabs" role="tablist" aria-label="Quién puntúa">
+        <button class="tab on-b" id="tabB" role="tab" aria-selected="true">🟢 Brian</button>
+        <button class="tab" id="tabR" role="tab" aria-selected="false">💜 Rocío</button>
+      </div>
+      <div class="tabpane" id="paneB" data-user="brian"></div>
+      <div class="tabpane" id="paneR" data-user="rocio" hidden></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="btnRateCancel">Cancelar</button>
+      <button class="btn btn-primary" id="btnRateSave">Guardar puntajes</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM DELETE -->
+<div class="overlay" id="ovDel" role="alertdialog" aria-modal="true" aria-labelledby="delTitle">
+  <div class="modal confirm-box">
+    <div class="modal-body">
+      <div style="font-size:38px">🗑️</div>
+      <h2 id="delTitle" style="font-family:'Fraunces',serif;margin-top:8px">¿Eliminar esta cafetería?</h2>
+      <p id="delName"></p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="btnDelNo">No, volver</button>
+      <button class="btn btn-danger" id="btnDelYes">Sí, eliminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL WISHLIST -->
+<div class="overlay" id="ovWish" role="dialog" aria-modal="true" aria-labelledby="wishTitle">
+  <div class="modal confirm-box" style="text-align:left;max-width:480px">
+    <div class="modal-head">
+      <h2 id="wishTitle">Agregar a la <span>wishlist</span></h2>
+      <button class="x" id="xWish" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-body" style="padding:20px 24px;text-align:left">
+      <div class="field">
+        <label for="wName">Nombre de la cafetería *</label>
+        <input id="wName" type="text" placeholder="Ej: Cuervo Café" maxlength="60" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="wLoc">Barrio / zona</label>
+        <input id="wLoc" type="text" list="barriosList" placeholder="Ej: Chacarita, San Isidro…" maxlength="50" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>¿Quién la propone?</label>
+        <div class="by-picker" id="byPicker">
+          <button type="button" class="b" data-by="brian">🟢 Brian</button>
+          <button type="button" class="r" data-by="rocio">💜 Rocío</button>
+          <button type="button" class="a on" data-by="ambos">✨ Los dos</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="wInsta">Link de Instagram / Reel</label>
+        <input id="wInsta" type="url" placeholder="https://www.instagram.com/reel/…" maxlength="300" autocomplete="off" inputmode="url">
+      </div>
+      <div class="field">
+        <label for="wNote">Nota</label>
+        <input id="wNote" type="text" placeholder="Ej: lo vimos en Instagram, dicen que el brunch es 10" maxlength="140" autocomplete="off">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="btnWishCancel">Cancelar</button>
+      <button class="btn btn-primary" id="btnWishSave">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL RULETA -->
+<div class="overlay" id="ovRuleta" role="dialog" aria-modal="true" aria-labelledby="ruletaTitle">
+  <div class="modal ruleta-box">
+    <div class="modal-head">
+      <h2 id="ruletaTitle">🎰 ¿A dónde <span>vamos hoy</span>?</h2>
+      <button class="x" id="xRuleta" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="ruleta-src" id="ruletaSrc">
+        <button class="on" data-src="all">Todas</button>
+        <button data-src="fav">Favoritas 4★+</button>
+        <button data-src="less">Menos visitadas</button>
+        <button data-src="wish">💫 Wishlist</button>
+      </div>
+      <div class="ruleta-stage" id="ruletaStage">
+        <div class="ruleta-name" id="ruletaName">☕ ✨</div>
+        <div class="ruleta-sub" id="ruletaSub">Elegí el modo y girá</div>
+      </div>
+      <div class="ruleta-actions" id="ruletaActions"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="btnRuletaClose">Cerrar</button>
+      <button class="btn btn-primary" id="btnSpin">🎲 Girar</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONECTAR NUBE -->
+<div class="overlay" id="ovCloud" role="dialog" aria-modal="true" aria-labelledby="cloudTitle">
+  <div class="modal confirm-box" style="text-align:left;max-width:540px">
+    <div class="modal-head">
+      <h2 id="cloudTitle">Sincronización <span>en la nube</span></h2>
+      <button class="x" id="xCloud" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-body" style="padding:20px 24px;text-align:left">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Con esto, lo que carga uno le aparece al otro <b>al instante</b>. Necesitan crear un proyecto gratuito en Firebase (te paso la guía) y pegar acá su configuración. Los dos usan <b>la misma configuración y el mismo código</b>.</p>
+      <div class="field">
+        <label for="fbConfigBox">1 · Configuración de Firebase</label>
+        <textarea id="fbConfigBox" style="min-height:110px;font-family:monospace;font-size:11.5px" placeholder='Pegá el bloque que te da Firebase, tal cual:&#10;const firebaseConfig = { apiKey: "...", projectId: "...", ... };'></textarea>
+      </div>
+      <div class="field">
+        <label for="fbRoomBox">2 · Código de pareja (inventalo y compártanlo)</label>
+        <input id="fbRoomBox" type="text" placeholder="ej: brian-rocio-2026" autocomplete="off">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="btnCloudCancel">Cancelar</button>
+      <button class="btn btn-ghost" id="btnCloudOff">Desconectar</button>
+      <button class="btn btn-primary" id="btnCloudGo">Conectar</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORTAR PEGANDO -->
+<div class="overlay" id="ovPaste" role="dialog" aria-modal="true" aria-labelledby="pasteTitle">
+  <div class="modal confirm-box" style="text-align:left;max-width:520px">
+    <div class="modal-head">
+      <h2 id="pasteTitle">Importar <span>pegando el texto</span></h2>
+      <button class="x" id="xPaste" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-body" style="padding:20px 24px;text-align:left">
+      <div class="field">
+        <label for="pasteBox">Pegá acá el contenido del backup</label>
+        <textarea id="pasteBox" style="min-height:150px;font-family:monospace;font-size:12px" placeholder='Abrí el archivo .json, seleccioná todo (empieza con {"app":"cafeterias-…), copialo y pegalo acá.'></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="btnPasteCancel">Cancelar</button>
+      <button class="btn btn-ghost" id="btnPasteFile">📁 Elegir archivo</button>
+      <button class="btn btn-primary" id="btnPasteGo">Importar</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM RESTORE -->
+<div class="overlay" id="ovRestore" role="alertdialog" aria-modal="true" aria-labelledby="restTitle">
+  <div class="modal confirm-box">
+    <div class="modal-body">
+      <div style="font-size:38px">📥</div>
+      <h2 id="restTitle" style="font-family:'Fraunces',serif;margin-top:8px">¿Restaurar este backup?</h2>
+      <p id="restInfo"></p>
+      <p style="color:var(--danger);font-weight:700;font-size:13px">Reemplaza TODOS los datos actuales.</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="btnRestNo">No, volver</button>
+      <button class="btn btn-primary" id="btnRestYes">Sí, restaurar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+"use strict";
+/* ============ CONFIG / ESTADO ============ */
+const STORE_KEY = "cafeterias-brian-rocio-v1";
+const PHOTO_PREFIX = "cafeterias-br-fotos:";
+const MAX_PHOTOS = 4;
+const CATS = [
+  {key:"cafe",    label:"Café",                ico:"☕"},
+  {key:"comida",  label:"Comida",              ico:"🥐"},
+  {key:"atencion",label:"Atención",            ico:"🤝"},
+  {key:"lugar",   label:"Lugar / ambientación",ico:"✨"},
+  {key:"precio",  label:"Precio",              ico:"💸"}
+];
+const USERS = [
+  {key:"brian", name:"Brian", short:"B"},
+  {key:"rocio", name:"Rocío", short:"R"}
+];
+
+let state = { cafes: [], wishlist: [] };
+let photoCache = {};        // cafeId -> [dataURL]
+let editingId = null;
+let pendingDeleteId = null;
+let pendingWishConvert = null; // id de wishlist que se convierte en cafetería al guardar
+let editingWishId = null;
+let wishBy = "ambos";
+let draftRatings = emptyRatings();
+let draftPhotos = [];
+let activePop = null;       // popup del mapa
+let ruletaTimer = null;
+let ruletaResult = null;
+
+function emptyRatings(){
+  const o = {};
+  for (const u of USERS){ o[u.key] = {}; for (const c of CATS) o[u.key][c.key] = 0; }
+  return o;
+}
+
+/* ============ STORAGE (COMPARTIDO: los dos ven y editan lo mismo) ============ */
+/* Fuera de Claude (ej. GitHub Pages) no existe window.storage:
+   usamos localStorage del navegador con la misma interfaz. */
+let WEB_MODE = false;
+(function(){
+  if (typeof window === "undefined" || (window.storage && typeof window.storage.get === "function")) return;
+  let ls = null;
+  try{ ls = window.localStorage; ls.setItem("__cafe_test","1"); ls.removeItem("__cafe_test"); }catch(e){ return; }
+  WEB_MODE = true;
+  const P = "cafeweb:";
+  window.storage = {
+    async get(key){ const v = ls.getItem(P+key); if (v === null) throw new Error("not found"); return { key, value: v }; },
+    async set(key, value){
+      try{ ls.setItem(P+key, value); }
+      catch(e){ throw new Error("quota"); }
+      return { key, value };
+    },
+    async delete(key){ ls.removeItem(P+key); return { key, deleted:true }; },
+    async list(prefix){
+      const keys = [];
+      for (let i=0;i<ls.length;i++){
+        const k = ls.key(i);
+        if (k && k.startsWith(P+(prefix||""))) keys.push(k.slice(P.length));
+      }
+      return { keys };
+    }
+  };
+})();
+let hasStorage = typeof window !== "undefined" && window.storage && typeof window.storage.get === "function";
+const SHARED = true;
+let CLOUD = { on:false, db:null, room:"", unsub:null, lastWritten:{} };
+const FB_LS_KEY = "cafeweb:fbconfig";
+
+function fbEncodeKey(k){ return String(k).replace(/[.#$\[\]\/:]/g, "__"); }
+function fbRef(key){ return CLOUD.db.ref("apps/" + CLOUD.room + "/kv/" + fbEncodeKey(key)); }
+
+function parseFbConfig(text){
+  // acepta el bloque tal cual lo da la consola de Firebase (claves sin comillas) o JSON puro
+  const m = String(text||"").match(/\{[\s\S]*\}/);
+  if (!m) return null;
+  let obj = null;
+  try{ obj = JSON.parse(m[0]); }catch(e){
+    try{ obj = (new Function("return (" + m[0] + ")"))(); }catch(e2){ return null; }
+  }
+  if (!obj || !obj.apiKey || !obj.projectId) return null;
+  if (!obj.databaseURL) obj.databaseURL = "https://" + obj.projectId + "-default-rtdb.firebaseio.com";
+  return obj;
+}
+function loadFbSdk(){
+  return new Promise((resolve, reject)=>{
+    if (window.firebase && window.firebase.database){ resolve(); return; }
+    let pending = 2;
+    const done = ()=>{ if (--pending === 0) resolve(); };
+    for (const f of ["firebase-app-compat.js","firebase-database-compat.js"]){
+      const s = document.createElement("script");
+      s.src = "https://www.gstatic.com/firebasejs/10.12.0/" + f;
+      s.onload = done;
+      s.onerror = ()=>reject(new Error("sdk"));
+      document.head.appendChild(s);
+    }
+  });
+}
+function makeFbStorage(){
+  return {
+    async get(key){
+      const snap = await fbRef(key).once("value");
+      const v = snap.val();
+      if (v === null || v === undefined) throw new Error("not found");
+      return { key, value: v };
+    },
+    async set(key, value){
+      CLOUD.lastWritten[key] = value;
+      await fbRef(key).set(value);
+      return { key, value };
+    },
+    async delete(key){ await fbRef(key).remove(); return { key, deleted:true }; },
+    async list(prefix){
+      const snap = await CLOUD.db.ref("apps/" + CLOUD.room + "/kv").once("value");
+      const all = snap.val() || {};
+      const enc = fbEncodeKey(prefix || "");
+      const encMain = {};
+      // reconstruir claves originales conocidas
+      const keys = [];
+      for (const ek in all){
+        const k = ek.replace(/__/g, ":"); // nuestras claves solo usaban ':'
+        if (!prefix || k.startsWith(prefix)) keys.push(k);
+      }
+      return { keys };
+    }
+  };
+}
+async function connectCloud(configText, room){
+  const cfg = parseFbConfig(configText);
+  if (!cfg){ toastMsg("⚠️ Esa configuración no parece de Firebase — pegá el bloque completo con apiKey y projectId"); return false; }
+  room = String(room||"").trim().toLowerCase().replace(/[^a-z0-9-]/g,"-");
+  if (room.length < 4){ toastMsg("⚠️ El código de pareja necesita al menos 4 letras/números"); return false; }
+  try{ await loadFbSdk(); }
+  catch(e){ toastMsg("⚠️ No se pudo cargar Firebase (¿hay internet?)"); return false; }
+  try{
+    if (!window.firebase.apps || !window.firebase.apps.length) window.firebase.initializeApp(cfg);
+    CLOUD.db = window.firebase.database();
+    CLOUD.room = room;
+  }catch(e){ toastMsg("⚠️ La configuración fue rechazada por Firebase"); return false; }
+
+  // migración inteligente: si la nube ya tiene datos, gana la nube; si no, subimos lo local
+  const localState = JSON.stringify(state);
+  let cloudHas = false;
+  try{
+    const r = await makeFbStorage().get(STORE_KEY);
+    if (r && r.value){ const p = JSON.parse(r.value); cloudHas = p && Array.isArray(p.cafes) && p.cafes.length > 0; }
+  }catch(e){}
+  const localAdapter = window.storage;   // localStorage / Claude, para leer fotos locales
+  window.storage = makeFbStorage();
+  hasStorage = true;
+  CLOUD.on = true;
+  if (!cloudHas && state.cafes.length){
+    await window.storage.set(STORE_KEY, localState);
+    for (const id in photoCache){
+      try{ await window.storage.set(PHOTO_PREFIX + id, JSON.stringify(photoCache[id])); }catch(e){}
+    }
+    toastMsg("☁️ Tus datos subieron a la nube");
+  }
+  photoCache = {};
+  await loadState();
+  render();
+  // tiempo real: cuando el otro guarda, se refleja acá al instante
+  CLOUD.unsub = fbRef(STORE_KEY).on("value", async (snap)=>{
+    const v = snap.val();
+    if (!v || v === CLOUD.lastWritten[STORE_KEY]) return;
+    try{
+      const parsed = JSON.parse(v);
+      if (parsed && Array.isArray(parsed.cafes)){
+        state = parsed;
+        migrate();
+        photoCache = {};
+        await loadPhotos();
+        render();
+        toastMsg("✨ Actualizado desde la nube");
+      }
+    }catch(e){}
+  });
+  try{ localStorage.setItem(FB_LS_KEY, JSON.stringify({ config: cfg, room })); }catch(e){}
+  $("cloudTag").hidden = false;
+  $("webModeTag").hidden = true;
+  toastMsg("☁️ Sincronización activada — código: " + room);
+  return true;
+}
+function disconnectCloud(){
+  try{ if (CLOUD.unsub) fbRef(STORE_KEY).off("value", CLOUD.unsub); }catch(e){}
+  try{ localStorage.removeItem(FB_LS_KEY); }catch(e){}
+  toastMsg("☁️ Desconectado. Recargá la página para volver al guardado local.");
+}
+async function autoConnectCloud(){
+  if (!WEB_MODE) return;   // dentro de Claude ya hay compartido nativo
+  let saved = null;
+  try{ saved = JSON.parse(localStorage.getItem(FB_LS_KEY) || "null"); }catch(e){}
+  if (saved && saved.config && saved.room){
+    await connectCloud(JSON.stringify(saved.config), saved.room);
+  }
+}
+
+async function loadState(){
+  if (!hasStorage) return;
+  let loaded = false;
+  try{
+    const res = await window.storage.get(STORE_KEY, SHARED);
+    if (res && res.value){
+      const parsed = JSON.parse(res.value);
+      if (parsed && Array.isArray(parsed.cafes)){ state = parsed; loaded = true; }
+    }
+  }catch(e){ /* aún no existe en compartido */ }
+  if (!loaded){
+    // migración única: si había datos personales (versión anterior), pasarlos al compartido
+    try{
+      const old = await window.storage.get(STORE_KEY, false);
+      if (old && old.value){
+        const parsed = JSON.parse(old.value);
+        if (parsed && Array.isArray(parsed.cafes)){
+          state = parsed;
+          await window.storage.set(STORE_KEY, old.value, SHARED);
+          try{
+            const lp = await window.storage.list(PHOTO_PREFIX, false);
+            for (const k of ((lp && lp.keys) || [])){
+              try{
+                const ph = await window.storage.get(k, false);
+                if (ph && ph.value) await window.storage.set(k, ph.value, SHARED);
+              }catch(e2){}
+            }
+          }catch(e2){}
+          toastMsg("🤝 Datos migrados al modo compartido: ahora los dos ven lo mismo");
+        }
+      }
+    }catch(e){ /* no había datos previos */ }
+  }
+  migrate();
+  await loadPhotos();
+}
+function migrate(){
+  let changed = false;
+  if (!Array.isArray(state.wishlist)){ state.wishlist = []; changed = true; }
+  for (const c of state.cafes){
+    if (!Array.isArray(c.visits)){
+      c.visits = (c.date || c.pedido) ? [{ id: uid(), date: c.date || "", pedido: c.pedido || "" }] : [];
+      delete c.date; delete c.pedido;
+      changed = true;
+    }
+    if (typeof c.coords === "undefined"){ c.coords = null; changed = true; }
+  }
+  if (changed) saveState();
+}
+async function loadPhotos(){
+  if (!hasStorage || typeof window.storage.list !== "function") return;
+  try{
+    const res = await window.storage.list(PHOTO_PREFIX, SHARED);
+    const keys = (res && res.keys) || [];
+    for (const k of keys){
+      try{
+        const r = await window.storage.get(k, SHARED);
+        if (r && r.value){
+          const arr = JSON.parse(r.value);
+          if (Array.isArray(arr)) photoCache[k.slice(PHOTO_PREFIX.length)] = arr;
+        }
+      }catch(e){}
+    }
+  }catch(e){}
+}
+async function saveState(){
+  if (!hasStorage){ toastMsg("⚠️ Guardado no disponible en esta vista"); return; }
+  try{ await window.storage.set(STORE_KEY, JSON.stringify(state), SHARED); }
+  catch(e){ toastMsg("⚠️ No se pudo guardar. Probá de nuevo."); }
+}
+async function savePhotos(cafeId, photos){
+  if (!hasStorage) return;
+  const key = PHOTO_PREFIX + cafeId;
+  try{
+    if (photos && photos.length){
+      await window.storage.set(key, JSON.stringify(photos), SHARED);
+      photoCache[cafeId] = photos;
+    }else{
+      delete photoCache[cafeId];
+      if (typeof window.storage.delete === "function"){
+        try{ await window.storage.delete(key, SHARED); }catch(e){}
+      }
+    }
+  }catch(e){ toastMsg("⚠️ Las fotos no se pudieron guardar (¿muy pesadas?)"); }
+}
+async function deletePhotoKey(cafeId){
+  delete photoCache[cafeId];
+  if (hasStorage && typeof window.storage.delete === "function"){
+    try{ await window.storage.delete(PHOTO_PREFIX + cafeId, SHARED); }catch(e){}
+  }
+}
+
+/* ============ HELPERS ============ */
+const $ = (id)=>document.getElementById(id);
+function esc(s){
+  return String(s ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+}
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+function userAvg(cafe, u){
+  const r = (cafe.ratings && cafe.ratings[u]) || {};
+  const vals = CATS.map(c => Number(r[c.key]) || 0).filter(v => v > 0);
+  if (!vals.length) return 0;
+  return vals.reduce((a,b)=>a+b,0)/vals.length;
+}
+function cafeAvg(cafe){
+  const avgs = USERS.map(u => userAvg(cafe, u.key)).filter(v => v > 0);
+  if (!avgs.length) return 0;
+  return avgs.reduce((a,b)=>a+b,0)/avgs.length;
+}
+function fmt(n){ return n ? (Math.round(n*10)/10).toFixed(1) : "—"; }
+function fmtDate(iso){
+  if (!iso) return "";
+  const [y,m,d] = iso.split("-").map(Number);
+  if (!y || !m || !d) return "";
+  return new Date(y, m-1, d).toLocaleDateString("es-AR", {day:"numeric", month:"short", year:"numeric"});
+}
+function lastVisit(cafe){
+  const vs = (cafe.visits || []).filter(v => v.date).sort((a,b)=>a.date.localeCompare(b.date));
+  return vs.length ? vs[vs.length-1] : (cafe.visits && cafe.visits[0]) || null;
+}
+function parseCoords(str){
+  if (!str) return null;
+  const m = String(str).trim().match(/(-?\d{1,3}(?:[.,]\d+)?)[\s,;]+(-?\d{1,3}(?:[.,]\d+)?)/);
+  if (!m) return null;
+  const lat = parseFloat(m[1].replace(",", "."));
+  const lng = parseFloat(m[2].replace(",", "."));
+  if (isNaN(lat) || isNaN(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) return null;
+  return { lat, lng };
+}
+function starSVG(){
+  return '<svg viewBox="0 0 24 24"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg>';
+}
+function miniStars(avg, color){
+  const full = Math.round(avg);
+  let h = '<span class="mini-stars">';
+  for (let i=1;i<=5;i++){
+    const on = i <= full && avg > 0;
+    h += '<svg viewBox="0 0 24 24" fill="'+(on?color:"none")+'" stroke="'+(on?color:"rgba(154,160,201,.55)")+'" stroke-width="1.6"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg>';
+  }
+  return h + '</span>';
+}
+let toastTimer = null;
+function toastMsg(msg){
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("show"), 2600);
+}
+function gmapsUrl(c){
+  if (c.coords) return "https://www.google.com/maps/search/?api=1&query=" + c.coords.lat + "," + c.coords.lng;
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(c.name + " " + (c.location || ""));
+}
+function normalizeUrl(str){
+  let s = String(str || "").trim();
+  if (!s) return "";                       // vacío es válido (opcional)
+  if (!/^https?:\/\//i.test(s)) s = "https://" + s;
+  // debe tener un dominio real (letras/números + punto + tld); corta javascript:, data:, etc.
+  if (!/^https?:\/\/[\w-]+(\.[\w-]+)+([\/?#]|$)/i.test(s)) return null;
+  return s;
+}
+
+/* ============ RENDER LISTA ============ */
+function render(){
+  const q = $("q").value.trim().toLowerCase();
+  const sort = $("sort").value;
+  let list = state.cafes.slice();
+
+  if (q) list = list.filter(c =>
+    (c.name||"").toLowerCase().includes(q) ||
+    (c.location||"").toLowerCase().includes(q) ||
+    (c.visits||[]).some(v => (v.pedido||"").toLowerCase().includes(q))
+  );
+
+  if (sort === "top")         list.sort((a,b)=>cafeAvg(b)-cafeAvg(a));
+  else if (sort === "name")   list.sort((a,b)=>(a.name||"").localeCompare(b.name||"", "es"));
+  else if (sort === "visits") list.sort((a,b)=>((b.visits||[]).length)-((a.visits||[]).length));
+  else                        list.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+
+  const grid = $("grid");
+  grid.innerHTML = "";
+  $("empty").hidden = state.cafes.length > 0;
+  if (q && !list.length && state.cafes.length){
+    grid.innerHTML = '<div class="empty" style="grid-column:1/-1"><div class="cup">🔍</div><h2>Sin resultados</h2><p>No encontramos ninguna cafetería con "'+esc(q)+'".</p></div>';
+  }
+
+  for (const c of list){
+    const avg = cafeAvg(c);
+    const nVisits = (c.visits||[]).length;
+    const lv = lastVisit(c);
+    const cover = (photoCache[c.id] && photoCache[c.id][0]) || null;
+    const card = document.createElement("article");
+    card.className = "card";
+
+    let mini = "";
+    for (const u of USERS){
+      const ua = userAvg(c, u.key);
+      const color = u.key === "brian" ? "#3ee6c4" : "#f06fc8";
+      mini += '<div class="mini-row"><span class="who '+(u.key==="brian"?"b":"r")+'">'+u.short+'</span>'
+            + miniStars(ua, color)
+            + '<span class="mini-val">'+(ua? fmt(ua)+" / 5" : "sin puntuar")+'</span></div>';
+    }
+    card.innerHTML =
+      (cover ? '<img class="cover" src="'+cover+'" alt="Foto de '+esc(c.name)+'" loading="lazy">' : "")
+      + '<div class="card-body">'
+      + '<div class="card-head"><div><h3>'+esc(c.name)+'</h3>'
+      +   '<div class="meta">'
+      +     '<span class="chip-visitas">☕ ×'+nVisits+' '+(nVisits===1?"visita":"visitas")+'</span>'
+      +     esc([c.location, lv && lv.date ? fmtDate(lv.date) : ""].filter(Boolean).join(" · "))
+      +   '</div></div>'
+      +   '<span class="badge-avg" title="Promedio de los dos">'+starSVG()+fmt(avg)+'</span></div>'
+      + '<div class="mini-rows">'+mini+'</div>'
+      + (lv && lv.pedido ? '<div class="pedido-chip"><b>Último pedido:</b> '+esc(lv.pedido)+'</div>' : "")
+      + '<div class="card-actions">'
+      +   '<button class="btn '+(avg ? "btn-ghost" : "btn-primary")+'" data-rate="'+c.id+'" title="Puntuar entre los dos">⭐ Puntuar</button>'
+      +   '<button class="btn btn-ghost" data-edit="'+c.id+'" title="Editar la info">✏️</button>'
+      +   '<button class="btn btn-ghost" data-visit="'+c.id+'" title="Registrar una nueva visita">➕</button>'
+      +   (c.instagram ? '<a class="btn btn-ghost gmaps" href="'+esc(c.instagram)+'" target="_blank" rel="noopener" title="Ver en Instagram">📸</a>' : '')
+      +   '<a class="btn btn-ghost gmaps" href="'+gmapsUrl(c)+'" target="_blank" rel="noopener" title="Abrir en Google Maps">🧭</a>'
+      +   '<button class="btn btn-danger" data-del="'+c.id+'" style="flex:none">🗑</button>'
+      + '</div></div>';
+    card.style.setProperty("--i", Math.min(grid.children.length, 8));
+    grid.appendChild(card);
+  }
+  renderHighlights();
+  grid.querySelectorAll(".badge-avg svg path").forEach(p=>{p.setAttribute("fill","#3ee6c4");p.setAttribute("stroke","none");});
+
+  renderStats();
+  renderMap();
+  renderWishlist();
+}
+
+function renderStats(){
+  $("stCount").textContent = state.cafes.length;
+  $("stVisits").textContent = state.cafes.reduce((a,c)=>a+((c.visits||[]).length),0);
+  $("stWish").textContent = state.wishlist.length;
+  $("wishN").textContent = state.wishlist.length;
+  const rated = state.cafes.filter(c => cafeAvg(c) > 0);
+  const global = rated.length ? rated.reduce((a,c)=>a+cafeAvg(c),0)/rated.length : 0;
+  $("stAvg").innerHTML = global ? fmt(global)+' <em>★</em>' : "—";
+  let best = null;
+  for (const c of rated){ if (!best || cafeAvg(c) > cafeAvg(best)) best = c; }
+  $("stBest").textContent = best ? best.name : "—";
+}
+
+/* ============ MAPA DE BUENOS AIRES (2 niveles: AMBA / Provincia) ============ */
+const MAPS = {
+  amba: {
+    lon0:-58.80, lon1:-58.22, lat0:-34.40, lat1:-34.80, W:1000, H:840,
+    places: {
+      caba: {
+        "Palermo":[-34.578,-58.425], "Belgrano":[-34.562,-58.456], "Núñez":[-34.545,-58.463],
+        "Saavedra":[-34.555,-58.488], "Villa Urquiza":[-34.570,-58.491], "Villa Pueyrredón":[-34.582,-58.505],
+        "Villa Devoto":[-34.596,-58.513], "Villa del Parque":[-34.605,-58.492], "Colegiales":[-34.573,-58.449],
+        "Chacarita":[-34.588,-58.454], "Villa Crespo":[-34.599,-58.438], "Recoleta":[-34.588,-58.394],
+        "Retiro":[-34.592,-58.375], "Puerto Madero":[-34.611,-58.363], "San Nicolás":[-34.601,-58.377],
+        "Monserrat":[-34.614,-58.385], "Balvanera":[-34.610,-58.404], "San Telmo":[-34.621,-58.371],
+        "La Boca":[-34.635,-58.363], "Barracas":[-34.647,-58.383], "Parque Patricios":[-34.636,-58.401],
+        "Boedo":[-34.626,-58.417], "Almagro":[-34.610,-58.421], "Caballito":[-34.618,-58.443],
+        "Flores":[-34.628,-58.463], "Liniers":[-34.640,-58.520], "Mataderos":[-34.658,-58.503],
+        "Villa Lugano":[-34.674,-58.474]
+      },
+      gba: {
+        "Vicente López":[-34.526,-58.475], "Olivos":[-34.507,-58.492], "Martínez":[-34.490,-58.506],
+        "San Isidro":[-34.471,-58.527], "San Fernando":[-34.443,-58.560], "Tigre":[-34.426,-58.580],
+        "San Martín":[-34.573,-58.537], "Caseros":[-34.606,-58.562], "Ciudadela":[-34.635,-58.542],
+        "Ramos Mejía":[-34.641,-58.567], "Haedo":[-34.643,-58.593], "Morón":[-34.653,-58.620],
+        "Castelar":[-34.649,-58.646], "Ituzaingó":[-34.658,-58.667], "Merlo":[-34.665,-58.728],
+        "Moreno":[-34.634,-58.788], "San Justo":[-34.677,-58.561], "Avellaneda":[-34.662,-58.365],
+        "Lanús":[-34.707,-58.393], "Lomas de Zamora":[-34.760,-58.402], "Quilmes":[-34.724,-58.254]
+      }
+    },
+    major: ["Palermo","Belgrano","Núñez","Villa Urquiza","Villa Devoto","Recoleta","San Nicolás",
+      "Balvanera","Almagro","Caballito","Flores","La Boca","Mataderos","Villa Lugano","Liniers","San Telmo"],
+    alias: {
+      "once":"Balvanera", "congreso":"Balvanera", "centro":"San Nicolás", "microcentro":"San Nicolás",
+      "tribunales":"San Nicolás", "constitucion":"San Telmo", "barrio chino":"Belgrano",
+      "floresta":"Flores", "parque chacabuco":"Caballito", "san cristobal":"Boedo",
+      "pompeya":"Parque Patricios", "devoto":"Villa Devoto", "urquiza":"Villa Urquiza",
+      "florida":"Vicente López", "villa ballester":"San Martín", "boulogne":"San Isidro",
+      "beccar":"San Isidro", "la lucila":"Vicente López"
+    }
+  },
+  prov: {
+    lon0:-63.60, lon1:-56.50, lat0:-33.20, lat1:-41.20, W:1000, H:1408,
+    places: {
+      prov: {
+        "La Plata":[-34.921,-57.955], "Luján":[-34.570,-59.105], "Mercedes":[-34.651,-59.430],
+        "Zárate":[-34.098,-59.028], "Campana":[-34.169,-58.959], "San Pedro":[-33.679,-59.666],
+        "San Nicolás de los Arroyos":[-33.336,-60.210], "Pergamino":[-33.890,-60.573],
+        "Junín":[-34.586,-60.943], "Chivilcoy":[-34.897,-60.017], "Bragado":[-35.118,-60.489],
+        "9 de Julio":[-35.444,-60.884], "Carlos Casares":[-35.622,-61.365], "Pehuajó":[-35.811,-61.897],
+        "Trenque Lauquen":[-35.971,-62.734], "General Villegas":[-35.033,-63.017], "Lincoln":[-34.866,-61.526],
+        "25 de Mayo":[-35.432,-60.173], "Saladillo":[-35.640,-59.778], "Bolívar":[-36.230,-61.113],
+        "Lobos":[-35.184,-59.095], "Cañuelas":[-35.052,-58.760], "Chascomús":[-35.573,-58.010],
+        "Dolores":[-36.313,-57.679], "San Clemente":[-36.357,-56.723], "Pinamar":[-37.108,-56.861],
+        "Villa Gesell":[-37.264,-56.973], "Mar del Plata":[-38.005,-57.542], "Miramar":[-38.271,-57.839],
+        "Balcarce":[-37.846,-58.255], "Tandil":[-37.321,-59.133], "Azul":[-36.777,-59.859],
+        "Olavarría":[-36.893,-60.322], "Necochea":[-38.554,-58.739], "Tres Arroyos":[-38.374,-60.275],
+        "Bahía Blanca":[-38.718,-62.266]
+      }
+    },
+    major: null,
+    alias: {
+      "casares":"Carlos Casares", "mardel":"Mar del Plata", "gesell":"Villa Gesell",
+      "nueve de julio":"9 de Julio", "san nicolas de los arroyos":"San Nicolás de los Arroyos",
+      "veinticinco de mayo":"25 de Mayo", "la costa":"San Clemente"
+    }
+  }
+};
+let mapMode = "amba";
+const mapViews = { amba:{x:0,y:0,k:1}, prov:{x:0,y:0,k:1} };
+function MDIM(){ return MAPS[mapMode]; }
+function MV(){ return mapViews[mapMode]; }
+function activeSvg(){ return $(mapMode === "amba" ? "mapSvg" : "mapSvgProv"); }
+function proj(lat, lon, M){
+  M = M || MAPS.amba;
+  return {
+    x: (lon - M.lon0) / (M.lon1 - M.lon0) * M.W,
+    y: (M.lat0 - lat) / (M.lat0 - M.lat1) * M.H
+  };
+}
+function normTxt(s){
+  return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
+}
+const placeIndex = (()=>{
+  const idx = { amba:{}, prov:{} };
+  for (const mk of ["amba","prov"]){
+    const M = MAPS[mk];
+    for (const zone in M.places){
+      for (const name in M.places[zone]){
+        const [lat, lon] = M.places[zone][name];
+        idx[mk][normTxt(name)] = { name, zone, map: mk, ...proj(lat, lon, M) };
+      }
+    }
+    for (const a in M.alias){
+      const target = idx[mk][normTxt(M.alias[a])];
+      if (target) idx[mk][normTxt(a)] = target;
+    }
+  }
+  return idx;
+})();
+function findPlace(location){
+  const q = normTxt(location);
+  if (!q) return null;
+  for (const mk of ["amba","prov"]){    // AMBA tiene prioridad (San Nicolás barrio vs ciudad)
+    if (placeIndex[mk][q]) return placeIndex[mk][q];
+  }
+  let best = null;
+  for (const mk of ["amba","prov"]){
+    for (const key in placeIndex[mk]){
+      if (q.includes(key) && (!best || key.length > best.key.length)) best = { key, hit: placeIndex[mk][key] };
+    }
+    if (best) return best.hit;          // primero agota AMBA
+  }
+  return null;
+}
+function findBarrio(location){ const h = findPlace(location); return (h && h.map === "amba") ? h : null; }
+let mapDragged = false;
+
+function labelHtml(name, p, cls, minor){
+  return '<circle class="b-dot" cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="2.2"></circle>'
+    + '<text class="b-label '+cls+(minor?" minor":"")+'" data-b="'+esc(normTxt(name))+'" x="'+p.x.toFixed(1)+'" y="'+(p.y-6).toFixed(1)+'" text-anchor="middle">'+esc(name)+'</text>';
+}
+function buildStaticMap(){
+  const A = MAPS.amba, Pv = MAPS.prov;
+  const PA = (lat,lon)=>{ const p = proj(lat,lon,A); return p.x.toFixed(1)+","+p.y.toFixed(1); };
+  const PP = (lat,lon)=>{ const p = proj(lat,lon,Pv); return p.x.toFixed(1)+","+p.y.toFixed(1); };
+
+  /* ---- nivel AMBA ---- */
+  const coast = [[-34.40,-58.62],[-34.43,-58.58],[-34.455,-58.545],[-34.475,-58.50],[-34.50,-58.47],
+    [-34.525,-58.455],[-34.55,-58.44],[-34.565,-58.415],[-34.58,-58.39],[-34.60,-58.36],
+    [-34.625,-58.345],[-34.65,-58.32],[-34.69,-58.28],[-34.71,-58.25],[-34.73,-58.22]];
+  const waterPath = "M " + coast.map(c=>PA(c[0],c[1])).join(" L ") + " L " + PA(-34.40,-58.22) + " Z";
+  const caba = [[-34.5335,-58.4655],[-34.5420,-58.5030],[-34.5710,-58.5257],[-34.5960,-58.5310],
+    [-34.6205,-58.5262],[-34.6438,-58.5312],[-34.6680,-58.5180],[-34.6870,-58.4920],
+    [-34.6960,-58.4650],[-34.6820,-58.4380],[-34.6650,-58.4200],[-34.6530,-58.3900],
+    [-34.6390,-58.3620],[-34.6270,-58.3480],[-34.6000,-58.3520],[-34.5800,-58.3680],
+    [-34.5560,-58.4100],[-34.5450,-58.4400]];
+  const cabaPath = "M " + caba.map(c=>PA(c[0],c[1])).join(" L ") + " Z";
+  let labelsA = "";
+  for (const zone in A.places){
+    for (const name in A.places[zone]){
+      const p = proj(A.places[zone][name][0], A.places[zone][name][1], A);
+      const minor = (zone === "caba" && A.major.indexOf(name) === -1);
+      labelsA += labelHtml(name, p, zone === "gba" ? "gba" : "", minor);
+    }
+  }
+  const rio = proj(-34.47,-58.33,A);
+  const svgA =
+    '<svg id="mapSvg" viewBox="0 0 '+A.W+' '+A.H+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa del AMBA">'
+    + '<defs><linearGradient id="waterGrad" x1="0" y1="0" x2="1" y2="1">'
+    +   '<stop offset="0%" stop-color="rgba(62,230,196,.16)"/><stop offset="100%" stop-color="rgba(96,140,250,.10)"/>'
+    + '</linearGradient></defs>'
+    + '<g id="mapG">'
+    +   '<path class="water" d="'+waterPath+'"></path>'
+    +   '<text class="water-lbl" x="'+rio.x+'" y="'+rio.y+'" text-anchor="middle" transform="rotate(33 '+rio.x+' '+rio.y+')">R\u00cdO DE LA PLATA</text>'
+    +   '<path class="caba-shape" d="'+cabaPath+'"></path>'
+    +   labelsA
+    +   '<g id="pinsLayer"></g>'
+    + '</g></svg>';
+
+  /* ---- nivel Provincia ---- */
+  const prov = [[-33.35,-60.20],[-33.75,-59.45],[-34.10,-59.00],[-34.30,-58.55],[-34.55,-58.40],
+    [-34.85,-57.85],[-35.30,-57.15],[-35.65,-57.30],[-36.30,-56.75],[-36.75,-56.68],
+    [-37.35,-57.05],[-38.05,-57.50],[-38.60,-58.70],[-38.98,-60.60],[-38.85,-62.10],
+    [-39.40,-62.20],[-40.80,-62.95],[-39.90,-63.40],[-38.00,-63.40],[-36.30,-63.40],
+    [-35.00,-63.40],[-34.25,-63.35],[-33.90,-62.50],[-34.00,-61.50],[-33.70,-61.00],[-33.90,-60.60]];
+  const provPath = "M " + prov.map(c=>PP(c[0],c[1])).join(" L ") + " Z";
+  const atl = [[-36.30,-56.75],[-36.75,-56.68],[-37.35,-57.05],[-38.05,-57.50],[-38.60,-58.70],
+    [-38.98,-60.60],[-38.85,-62.10],[-39.40,-62.20],[-40.80,-62.95]];
+  const atlPath = "M " + atl.map(c=>PP(c[0],c[1])).join(" L ")
+    + " L " + PP(-41.20,-56.50) + " L " + PP(-36.30,-56.50) + " Z";
+  const rioP = [[-33.35,-60.20],[-33.75,-59.45],[-34.10,-59.00],[-34.30,-58.55],[-34.55,-58.40],
+    [-34.85,-57.85],[-35.30,-57.15],[-35.65,-57.30],[-36.30,-56.75]];
+  const rioPPath = "M " + rioP.map(c=>PP(c[0],c[1])).join(" L ") + " L " + PP(-33.20,-56.50) + " L " + PP(-33.20,-60.20) + " Z";
+  let labelsP = "";
+  for (const name in Pv.places.prov){
+    labelsP += labelHtml(name, proj(Pv.places.prov[name][0], Pv.places.prov[name][1], Pv), "prov", false);
+  }
+  const amCenter = proj(-34.62,-58.45,Pv);
+  const atlLbl = proj(-38.4,-56.9,Pv);
+  const svgP =
+    '<svg id="mapSvgProv" viewBox="0 0 '+Pv.W+' '+Pv.H+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa de la provincia de Buenos Aires" class="svghide">'
+    + '<g id="mapGProv">'
+    +   '<path class="water" d="'+rioPPath+'"></path>'
+    +   '<path class="water" d="'+atlPath+'"></path>'
+    +   '<text class="water-lbl" x="'+atlLbl.x+'" y="'+atlLbl.y+'" text-anchor="middle" transform="rotate(52 '+atlLbl.x+' '+atlLbl.y+')">MAR ARGENTINO</text>'
+    +   '<path class="prov-shape" d="'+provPath+'"></path>'
+    +   labelsP
+    +   '<g class="amba-marker" id="ambaMarker" role="button" aria-label="Entrar al AMBA">'
+    +     '<path class="am-star" d="'+starPath(amCenter.x, amCenter.y, 13)+'" fill="#f06fc8" stroke="#090c22" stroke-width="1"></path>'
+    +     '<text x="'+amCenter.x+'" y="'+(amCenter.y-20)+'" text-anchor="middle">AMBA</text>'
+    +     '<text class="am-sub" id="ambaMarkerSub" x="'+amCenter.x+'" y="'+(amCenter.y+32)+'" text-anchor="middle">tocá para entrar</text>'
+    +   '</g>'
+    +   '<g id="pinsLayerProv"></g>'
+    + '</g></svg>';
+
+  $("starmap").insertAdjacentHTML("afterbegin", svgA + svgP);
+}
+function mapMetrics(){
+  const svg = activeSvg();
+  if (!svg) return { s:0, ox:0, oy:0, rect:null };
+  const rect = svg.getBoundingClientRect();
+  const M = MDIM();
+  const s = Math.min((rect.width||0)/M.W, (rect.height||0)/M.H);
+  return { s, ox:(rect.width - M.W*s)/2, oy:(rect.height - M.H*s)/2, rect };
+}
+function applyMapView(){
+  const svg = activeSvg();
+  if (!svg) return;
+  const g = svg.querySelector("g[id^=mapG]");
+  const v = MV();
+  g.setAttribute("transform", "translate("+v.x+" "+v.y+") scale("+v.k+")");
+  const m = mapMetrics();
+  if (m.s > 0){
+    const bl = Math.min(11 / m.s / Math.pow(v.k, 0.55), 60);
+    const pl = Math.min(12.5 / m.s / Math.pow(v.k, 0.45), 66);
+    svg.style.setProperty("--bl", bl.toFixed(2) + "px");
+    svg.style.setProperty("--pl", pl.toFixed(2) + "px");
+    const key = mapMode + ":" + Math.round(m.s * v.k * 50);
+    if (key !== music._declutterKey){ music._declutterKey = key; declutterLabels(m, svg); }
+  }
+}
+/* descongestión por prioridad, scoped al svg activo */
+function declutterLabels(m, svg){
+  const v = MV(), pxu = m.s * v.k;
+  const fontB = 11 * Math.pow(v.k, 0.45);
+  const fontP = 12.5 * Math.pow(v.k, 0.55);
+  const accepted = [];
+  const boxFor = (el, font)=>{
+    const x = parseFloat(el.getAttribute("x")) * pxu;
+    const y = parseFloat(el.getAttribute("y")) * pxu;
+    const w = (el.textContent.length) * font * 0.56;
+    const h = font * 1.3;
+    return { x0:x-w/2, y0:y-h, x1:x+w/2, y1:y+h*0.25, b: el.getAttribute("data-b") || "" };
+  };
+  const hits = (b, ownB)=>accepted.some(a =>
+    !(ownB && a.b === ownB) && b.x0 < a.x1 && a.x0 < b.x1 && b.y0 < a.y1 && a.y0 < b.y1);
+  svg.querySelectorAll(".pin-lbl, .amba-marker text").forEach(el=>accepted.push(boxFor(el, fontP)));
+  const labels = Array.from(svg.querySelectorAll(".b-label"));
+  const prio = el => el.classList.contains("has") ? 0 : (el.classList.contains("minor") ? 2 : 1);
+  labels.sort((a,b)=> prio(a)-prio(b) || parseFloat(a.getAttribute("y"))-parseFloat(b.getAttribute("y")));
+  for (const el of labels){
+    const own = el.classList.contains("has") ? el.getAttribute("data-b") : "";
+    const b = boxFor(el, fontB);
+    if (hits(b, own)){ el.classList.add("hid"); }
+    else { el.classList.remove("hid"); accepted.push(b); }
+  }
+}
+function clampMapView(){
+  const v = MV(), M = MDIM();
+  v.k = Math.min(9, Math.max(1, v.k));
+  v.x = Math.min(0, Math.max(M.W * (1 - v.k), v.x));
+  v.y = Math.min(0, Math.max(M.H * (1 - v.k), v.y));
+}
+function zoomAt(cx, cy, factor){
+  const v = MV();
+  const k2 = Math.min(9, Math.max(1, v.k * factor));
+  v.x = cx - (cx - v.x) * (k2 / v.k);
+  v.y = cy - (cy - v.y) * (k2 / v.k);
+  v.k = k2;
+  clampMapView();
+  applyMapView();
+  if (activePop){ activePop.remove(); activePop = null; }
+}
+function svgPoint(clientX, clientY){
+  const m = mapMetrics();
+  if (m.s > 0){
+    return { x:(clientX - m.rect.left - m.ox)/m.s, y:(clientY - m.rect.top - m.oy)/m.s };
+  }
+  const M = MDIM();
+  const rect = (activeSvg() && activeSvg().getBoundingClientRect()) || {left:0,top:0,width:1,height:1};
+  return { x:(clientX-rect.left)/(rect.width||1)*M.W, y:(clientY-rect.top)/(rect.height||1)*M.H };
+}
+function setMapMode(mode){
+  if (mode === mapMode) return;
+  mapMode = mode;
+  $("mapSvg").classList.toggle("svghide", mode !== "amba");
+  $("mapSvgProv").classList.toggle("svghide", mode !== "prov");
+  $("mmAmba").classList.toggle("on", mode === "amba");
+  $("mmProv").classList.toggle("on", mode === "prov");
+  $("mmAmba").setAttribute("aria-selected", mode === "amba" ? "true":"false");
+  $("mmProv").setAttribute("aria-selected", mode === "prov" ? "true":"false");
+  if (activePop){ activePop.remove(); activePop = null; }
+  music._declutterKey = null;
+  setTimeout(applyMapView, 0);
+}
+function bindMap(){
+  $("mmAmba").addEventListener("click", ()=>setMapMode("amba"));
+  $("mmProv").addEventListener("click", ()=>setMapMode("prov"));
+  $("zIn").addEventListener("click", ()=>{ const M=MDIM(); zoomAt(M.W/2, M.H/2, 1.45); });
+  $("zOut").addEventListener("click", ()=>{ const M=MDIM(); zoomAt(M.W/2, M.H/2, 1/1.45); });
+  $("zHome").addEventListener("click", ()=>{ const v=MV(); v.x=0; v.y=0; v.k=1; applyMapView(); });
+  for (const id of ["mapSvg","mapSvgProv"]){
+    const svg = $(id);
+    if (!svg) continue;
+    svg.addEventListener("wheel", (e)=>{
+      e.preventDefault();
+      const p = svgPoint(e.clientX, e.clientY);
+      zoomAt(p.x, p.y, e.deltaY < 0 ? 1.18 : 1/1.18);
+    }, {passive:false});
+    const pointers = new Map();
+    let lastPinch = 0, moved = 0;
+    svg.addEventListener("pointerdown", (e)=>{
+      pointers.set(e.pointerId, {x:e.clientX, y:e.clientY});
+      moved = 0;
+      if (svg.setPointerCapture) try{ svg.setPointerCapture(e.pointerId); }catch(err){}
+      svg.classList.add("dragging");
+    });
+    svg.addEventListener("pointermove", (e)=>{
+      if (!pointers.has(e.pointerId)) return;
+      const prev = pointers.get(e.pointerId);
+      pointers.set(e.pointerId, {x:e.clientX, y:e.clientY});
+      const m = mapMetrics();
+      const inv = m.s > 0 ? 1/m.s : MDIM().W / ((svg.getBoundingClientRect().width) || 1);
+      if (pointers.size === 1){
+        const dx = (e.clientX - prev.x), dy = (e.clientY - prev.y);
+        moved += Math.abs(dx) + Math.abs(dy);
+        const v = MV();
+        v.x += dx * inv;
+        v.y += dy * inv;
+        clampMapView();
+        applyMapView();
+      } else if (pointers.size === 2){
+        const pts = Array.from(pointers.values());
+        const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        if (lastPinch > 0){
+          const mid = svgPoint((pts[0].x + pts[1].x)/2, (pts[0].y + pts[1].y)/2);
+          zoomAt(mid.x, mid.y, dist / lastPinch);
+        }
+        lastPinch = dist;
+        moved = 99;
+      }
+    });
+    const endPointer = (e)=>{
+      pointers.delete(e.pointerId);
+      if (pointers.size < 2) lastPinch = 0;
+      if (pointers.size === 0) svg.classList.remove("dragging");
+      mapDragged = moved > 6;
+    };
+    svg.addEventListener("pointerup", endPointer);
+    svg.addEventListener("pointercancel", endPointer);
+  }
+  window.addEventListener("resize", ()=>{ if ($("mapView").classList.contains("on")) applyMapView(); });
+}
+function starPath(cx, cy, r){
+  let d = "";
+  for (let i=0;i<10;i++){
+    const ang = -Math.PI/2 + i*Math.PI/5;
+    const rad = i%2===0 ? r : r*0.42;
+    d += (i===0?"M":"L") + (cx+rad*Math.cos(ang)).toFixed(1) + "," + (cy+rad*Math.sin(ang)).toFixed(1) + " ";
+  }
+  return d + "Z";
+}
+function pinHtml(c, x, y, barrioNorm){
+  const avg = cafeAvg(c);
+  const col = avg >= 4 ? "#3ee6c4" : (avg >= 3 ? "#b18cff" : "#f06fc8");
+  const r = avg >= 4 ? 9 : 7;
+  return '<g class="pin" data-pin="'+c.id+'" role="button" aria-label="'+esc(c.name)+'">'
+    + '<circle class="halo" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+(r+5)+'" fill="'+col+'" opacity=".18"></circle>'
+    + '<path d="'+starPath(x, y, r)+'" fill="'+col+'" stroke="#090c22" stroke-width="1"></path>'
+    + '<text class="pin-lbl" data-b="'+esc(barrioNorm)+'" x="'+x.toFixed(1)+'" y="'+(y + r + 13).toFixed(1)+'" text-anchor="middle">'+esc(c.name)+'</text>'
+    + '</g>';
+}
+function renderMap(){
+  const layerA = $("pinsLayer"), layerP = $("pinsLayerProv");
+  if (!layerA) return;
+  if (activePop){ activePop.remove(); activePop = null; }
+  layerA.innerHTML = ""; layerP.innerHTML = "";
+  document.querySelectorAll(".b-label.has").forEach(el=>el.classList.remove("has"));
+
+  const placedA = [], placedP = [], fuera = [], sinBarrio = [];
+  for (const c of state.cafes){
+    if (!c.location || !c.location.trim()){ sinBarrio.push(c); continue; }
+    const hit = findPlace(c.location);
+    if (hit && hit.map === "amba") placedA.push({ cafe:c, hit });
+    else if (hit) placedP.push({ cafe:c, hit });
+    else fuera.push(c);
+  }
+  const renderGroups = (placed, layer, svgId)=>{
+    const groups = {};
+    for (const p of placed){
+      (groups[p.hit.name] = groups[p.hit.name] || { hit:p.hit, cafes:[] }).cafes.push(p.cafe);
+    }
+    let html = "";
+    for (const name in groups){
+      const g = groups[name];
+      const lbl = document.querySelector("#"+svgId+' .b-label[data-b="'+normTxt(name)+'"]');
+      if (lbl) lbl.classList.add("has");
+      g.cafes.forEach((c, i)=>{
+        const n = g.cafes.length;
+        const ang = -Math.PI/2 + (n>1 ? i*(2*Math.PI/n) : 0);
+        const R = n>1 ? 17 : 0;
+        html += pinHtml(c, g.hit.x + R*Math.cos(ang), g.hit.y + R*Math.sin(ang), normTxt(name));
+      });
+    }
+    layer.innerHTML = html;
+  };
+  renderGroups(placedA, layerA, "mapSvg");
+  renderGroups(placedP, layerP, "mapSvgProv");
+  $("ambaMarkerSub").textContent = placedA.length
+    ? "\u2605 " + placedA.length + (placedA.length===1?" caf\u00e9 \u00b7 toc\u00e1 para entrar":" caf\u00e9s \u00b7 toc\u00e1 para entrar")
+    : "toc\u00e1 para entrar";
+  music._declutterKey = null;
+  applyMapView();
+
+  const note = $("mapNote");
+  if (!state.cafes.length){
+    note.innerHTML = "Agreg\u00e1 cafeter\u00edas con su barrio o ciudad y van a aparecer brillando en el mapa. \u2728 Cambi\u00e1 entre <b>AMBA</b> y <b>Provincia</b> arriba a la izquierda; zoom con rueda, botones o pellizco.";
+  }else{
+    const parts = [];
+    if (placedA.length) parts.push("<b>"+placedA.length+"</b> en el AMBA");
+    if (placedP.length) parts.push("<b>"+placedP.length+"</b> en la provincia");
+    note.innerHTML = (parts.length? parts.join(" y ") : "Ninguna ubicada todav\u00eda") + " \u00b7 de "+state.cafes.length+" cafeter\u00edas. La estrella refleja el puntaje; us\u00e1 el selector AMBA/Provincia para moverte entre niveles.";
+  }
+  $("fueraMapa").hidden = fuera.length === 0;
+  const ft = $("fueraTags");
+  ft.innerHTML = "";
+  for (const c of fuera){
+    const b = document.createElement("button");
+    b.textContent = "\u2615 " + c.name + " \u00b7 " + c.location;
+    b.addEventListener("click", ()=>openForm(c));
+    ft.appendChild(b);
+  }
+  $("noCoords").hidden = sinBarrio.length === 0;
+  const tags = $("noCoordsTags");
+  tags.innerHTML = "";
+  for (const c of sinBarrio){
+    const b = document.createElement("button");
+    b.textContent = "\u2615 " + c.name;
+    b.addEventListener("click", ()=>openForm(c));
+    tags.appendChild(b);
+  }
+}
+function openMapPop(cafeId, pinEl){
+  const map = $("starmap");
+  if (activePop){ activePop.remove(); activePop = null; }
+  const c = state.cafes.find(x=>x.id===cafeId);
+  if (!c) return;
+  const pop = document.createElement("div");
+  pop.className = "map-pop";
+  const nV = (c.visits||[]).length;
+  pop.innerHTML =
+    '<h4>'+esc(c.name)+'</h4>'
+    + '<div class="sub">'+fmt(cafeAvg(c))+' \u2605 \u00b7 \u00d7'+nV+' '+(nV===1?"visita":"visitas")+(c.location? ' \u00b7 '+esc(c.location):'')+'</div>'
+    + '<div class="row">'
+    +   '<a class="btn btn-primary" href="'+gmapsUrl(c)+'" target="_blank" rel="noopener">\ud83e\udded C\u00f3mo llegar</a>'
+    +   (c.instagram ? '<a class="btn btn-ghost" href="'+esc(c.instagram)+'" target="_blank" rel="noopener" style="flex:none">\ud83d\udcf8</a>' : '')
+    +   '<button class="btn btn-ghost" data-popedit="'+c.id+'">\u270f\ufe0f</button>'
+    + '</div>';
+  const mrect = map.getBoundingClientRect();
+  const prect = pinEl.getBoundingClientRect ? pinEl.getBoundingClientRect() : {left:0,top:0,width:0,height:0};
+  let left = (prect.left - mrect.left) + prect.width/2;
+  let top  = (prect.top - mrect.top);
+  if (!isFinite(left) || (left === 0 && top === 0)){ left = mrect.width/2 || 200; top = (mrect.height/2 || 150); }
+  left = Math.min(Math.max(left, 120), (mrect.width || 400) - 120);
+  if (top < 140){ pop.style.transform = "translate(-50%, "+(prect.height + 14)+"px)"; }
+  pop.style.left = left + "px";
+  pop.style.top = top + "px";
+  map.appendChild(pop);
+  activePop = pop;
+}
+
+/* ============ WISHLIST ============ */
+const BY_LABEL = { brian:"🟢 Brian", rocio:"💜 Rocío", ambos:"✨ Los dos" };
+function renderWishlist(){
+  const grid = $("wlGrid");
+  grid.innerHTML = "";
+  $("wlEmpty").hidden = state.wishlist.length > 0;
+  const list = state.wishlist.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  for (const w of list){
+    const el = document.createElement("article");
+    el.className = "wl-card";
+    const byClass = w.by === "brian" ? "b" : (w.by === "rocio" ? "r" : "a");
+    el.innerHTML =
+      '<h3>'+esc(w.name)+'</h3>'
+      + '<div class="meta"><span class="chip-by '+byClass+'">'+(BY_LABEL[w.by]||BY_LABEL.ambos)+'</span>'
+      + (w.location ? '<span>📍 '+esc(w.location)+'</span>' : '')
+      + '</div>'
+      + (w.note ? '<div class="wl-note">"'+esc(w.note)+'"</div>' : '')
+      + '<div class="wl-actions">'
+      +   '<button class="btn btn-primary" data-wvisit="'+w.id+'">✨ La visitamos</button>'
+      +   (w.instagram ? '<a class="btn btn-ghost" href="'+esc(w.instagram)+'" target="_blank" rel="noopener" style="flex:none" title="Ver en Instagram">📸</a>' : '')
+      +   '<button class="btn btn-ghost" data-wedit="'+w.id+'" style="flex:none">✏️</button>'
+      +   '<button class="btn btn-danger" data-wdel="'+w.id+'">🗑</button>'
+      + '</div>';
+    grid.appendChild(el);
+  }
+}
+function openWishModal(item){
+  editingWishId = item ? item.id : null;
+  wishBy = item ? (item.by || "ambos") : "ambos";
+  $("wishTitle").innerHTML = item ? 'Editar <span>wishlist</span>' : 'Agregar a la <span>wishlist</span>';
+  $("wName").value = item ? (item.name||"") : "";
+  $("wLoc").value  = item ? (item.location||"") : "";
+  $("wInsta").value = item ? (item.instagram||"") : "";
+  $("wNote").value = item ? (item.note||"") : "";
+  paintByPicker();
+  $("ovWish").classList.add("open");
+  setTimeout(()=>$("wName").focus(), 60);
+}
+function closeWishModal(){ $("ovWish").classList.remove("open"); editingWishId = null; }
+function paintByPicker(){
+  $("byPicker").querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.by === wishBy));
+}
+async function saveWish(){
+  const name = $("wName").value.trim();
+  if (!name){ toastMsg("⚠️ Poné el nombre de la cafetería"); $("wName").focus(); return; }
+  const instagram = normalizeUrl($("wInsta").value);
+  if (instagram === null){ toastMsg("⚠️ El link de Instagram no parece válido"); $("wInsta").focus(); return; }
+  const data = { name, location: $("wLoc").value.trim(), instagram, by: wishBy, note: $("wNote").value.trim() };
+  if (editingWishId){
+    const i = state.wishlist.findIndex(w=>w.id===editingWishId);
+    if (i > -1) state.wishlist[i] = { ...state.wishlist[i], ...data };
+    toastMsg("✨ Wishlist actualizada");
+  }else{
+    state.wishlist.push({ id: uid(), createdAt: Date.now(), ...data });
+    toastMsg("💫 Sumada a la wishlist");
+  }
+  await saveState();
+  closeWishModal();
+  render();
+}
+function wishToVisit(id){
+  const w = state.wishlist.find(x=>x.id===id);
+  if (!w) return;
+  openForm(null);
+  pendingWishConvert = id;
+  $("formTitle").innerHTML = 'De la wishlist: <span>'+esc(w.name)+'</span>';
+  $("fName").value = w.name;
+  $("fLoc").value = w.location || "";
+  $("fInsta").value = w.instagram || "";
+}
+
+/* ============ RULETA ============ */
+let ruletaSrc = "all";
+function ruletaPool(src){
+  if (src === "wish") return state.wishlist.map(w=>({ type:"wish", id:w.id, name:w.name, sub:(w.location? "📍 "+w.location+" · ":"")+"de la wishlist" }));
+  let cafes = state.cafes.slice();
+  if (src === "fav") cafes = cafes.filter(c=>cafeAvg(c) >= 4);
+  else if (src === "less"){
+    if (cafes.length){
+      const min = Math.min(...cafes.map(c=>(c.visits||[]).length));
+      cafes = cafes.filter(c=>(c.visits||[]).length === min);
+    }
+  }
+  return cafes.map(c=>({ type:"cafe", id:c.id, name:c.name, sub:(cafeAvg(c)? fmt(cafeAvg(c))+" ★ · ":"")+"×"+((c.visits||[]).length)+" visitas" }));
+}
+function openRuleta(){
+  ruletaResult = null;
+  $("ruletaStage").classList.remove("done","spinning");
+  $("ruletaName").textContent = "☕ ✨";
+  $("ruletaSub").textContent = "Elegí el modo y girá";
+  $("ruletaActions").innerHTML = "";
+  $("btnSpin").disabled = false;
+  $("btnSpin").textContent = "🎲 Girar";
+  $("ovRuleta").classList.add("open");
+}
+function closeRuleta(){
+  clearInterval(ruletaTimer);
+  ruletaTimer = null;
+  $("ovRuleta").classList.remove("open");
+}
+function spin(){
+  const pool = ruletaPool(ruletaSrc);
+  const stage = $("ruletaStage");
+  if (!pool.length){
+    stage.classList.remove("done","spinning");
+    $("ruletaName").textContent = "😅";
+    $("ruletaSub").textContent = ruletaSrc === "wish" ? "La wishlist está vacía" : (ruletaSrc === "fav" ? "Todavía no hay cafeterías con 4★ o más" : "Todavía no hay cafeterías cargadas");
+    $("ruletaActions").innerHTML = "";
+    return;
+  }
+  const pick = pool[Math.floor(Math.random()*pool.length)];
+  const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finish = ()=>{
+    clearInterval(ruletaTimer);
+    ruletaTimer = null;
+    stage.classList.remove("spinning");
+    stage.classList.add("done");
+    $("ruletaName").textContent = pick.name;
+    $("ruletaSub").textContent = pick.sub;
+    ruletaResult = pick;
+    let actions = "";
+    if (pick.type === "wish"){
+      actions = '<button class="btn btn-primary" data-rvisit="'+pick.id+'">✨ ¡Vamos! La visitamos</button>';
+    }else{
+      const c = state.cafes.find(x=>x.id===pick.id);
+      if (c) actions = '<a class="btn btn-primary" href="'+gmapsUrl(c)+'" target="_blank" rel="noopener">🧭 Cómo llegar</a>'
+                     + '<button class="btn btn-ghost" data-rnewvisit="'+pick.id+'">➕ Visita</button>';
+    }
+    $("ruletaActions").innerHTML = actions;
+    $("btnSpin").disabled = false;
+    $("btnSpin").textContent = "🎲 Otra vez";
+  };
+  if (pool.length === 1 || reduced){ finish(); return; }
+  $("btnSpin").disabled = true;
+  stage.classList.remove("done");
+  stage.classList.add("spinning");
+  $("ruletaActions").innerHTML = "";
+  $("ruletaSub").textContent = "girando…";
+  let i = 0, ticks = 0;
+  const total = 16;
+  clearInterval(ruletaTimer);
+  ruletaTimer = setInterval(()=>{
+    $("ruletaName").textContent = pool[i % pool.length].name;
+    i++; ticks++;
+    if (ticks >= total) finish();
+  }, 90);
+}
+
+
+function visitRowHTML(v){
+  return '<div class="visit-row" data-vid="'+esc(v.id)+'">'
+    + '<input type="date" value="'+esc(v.date||"")+'" aria-label="Fecha de la visita">'
+    + '<input type="text" value="'+esc(v.pedido||"")+'" maxlength="300" placeholder="¿Qué pedimos? Ej: flat white + latte + medialunas" aria-label="Qué pedimos">'
+    + '<button type="button" class="rm" aria-label="Quitar visita">✕</button>'
+    + '</div>';
+}
+function addVisitRow(v){
+  const row = v || { id: uid(), date: new Date().toISOString().slice(0,10), pedido: "" };
+  $("visitRows").insertAdjacentHTML("beforeend", visitRowHTML(row));
+}
+function collectVisits(){
+  const out = [];
+  $("visitRows").querySelectorAll(".visit-row").forEach(row=>{
+    const date = row.querySelector('input[type=date]').value;
+    const pedido = row.querySelector('input[type=text]').value.trim();
+    if (date || pedido) out.push({ id: row.dataset.vid || uid(), date, pedido });
+  });
+  return out;
+}
+
+/* ============ FORM: fotos ============ */
+function renderThumbs(){
+  const box = $("thumbs");
+  let h = "";
+  draftPhotos.forEach((src,i)=>{
+    h += '<div class="thumb"><img src="'+src+'" alt="Foto '+(i+1)+'"><button type="button" data-rmphoto="'+i+'" aria-label="Quitar foto">✕</button></div>';
+  });
+  if (draftPhotos.length < MAX_PHOTOS){
+    h += '<button type="button" class="add-photo" id="btnAddPhoto"><span>📷</span>Agregar</button>';
+  }
+  box.innerHTML = h;
+  $("photoStatus").textContent = draftPhotos.length ? draftPhotos.length + " de " + MAX_PHOTOS + " fotos" : "Sin fotos todavía — la primera se usa como portada de la card.";
+}
+function compressImage(file){
+  return new Promise((resolve, reject)=>{
+    const reader = new FileReader();
+    reader.onerror = ()=>reject(new Error("read"));
+    reader.onload = ()=>{
+      const img = new Image();
+      img.onerror = ()=>reject(new Error("img"));
+      img.onload = ()=>{
+        try{
+          const MAXD = 1000;
+          let w = img.width, h = img.height;
+          if (Math.max(w,h) > MAXD){
+            const k = MAXD / Math.max(w,h);
+            w = Math.round(w*k); h = Math.round(h*k);
+          }
+          const cv = document.createElement("canvas");
+          cv.width = w; cv.height = h;
+          cv.getContext("2d").drawImage(img, 0, 0, w, h);
+          resolve(cv.toDataURL("image/jpeg", 0.72));
+        }catch(e){ reject(e); }
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+async function handleFiles(files){
+  const room = MAX_PHOTOS - draftPhotos.length;
+  const toAdd = Array.from(files).slice(0, room);
+  if (!toAdd.length){ toastMsg("Máximo "+MAX_PHOTOS+" fotos por cafetería"); return; }
+  $("photoStatus").textContent = "Procesando fotos…";
+  for (const f of toAdd){
+    if (!f.type || !f.type.startsWith("image/")) continue;
+    try{
+      const url = await compressImage(f);
+      draftPhotos.push(url);
+    }catch(e){ toastMsg("⚠️ No pude leer una de las fotos"); }
+  }
+  renderThumbs();
+}
+
+/* ============ FORM: abrir / cerrar / guardar ============ */
+function buildRatePanes(){
+  for (const u of USERS){
+    const pane = $(u.key === "brian" ? "paneB" : "paneR");
+    let h = "";
+    for (const c of CATS){
+      h += '<div class="rate-block">'
+         +   '<span class="cat"><span class="ico">'+c.ico+'</span>'+c.label+'</span>'
+         +   '<div class="starbar" role="radiogroup" aria-label="'+c.label+' de '+u.name+'">';
+      for (let i=1;i<=5;i++){
+        h += '<button type="button" class="star" data-user="'+u.key+'" data-cat="'+c.key+'" data-val="'+i+'" role="radio" aria-checked="false" aria-label="'+i+' de 5">'+starSVG()+'</button>';
+      }
+      h += '</div></div>';
+    }
+    h += '<div class="field" style="margin-top:14px">'
+       +   '<label for="notes-'+u.key+'">Observaciones de '+u.name+'</label>'
+       +   '<textarea id="notes-'+u.key+'" maxlength="500" placeholder="Ej: el flat white estaba en su punto, volvería solo por eso…"></textarea>'
+       + '</div>';
+    pane.innerHTML = h;
+  }
+}
+function paintStars(){
+  document.querySelectorAll("#ovRate .star").forEach(btn=>{
+    const {user, cat, val} = btn.dataset;
+    const cur = draftRatings[user][cat];
+    btn.classList.toggle("lit", Number(val) <= cur);
+    btn.setAttribute("aria-checked", Number(val) === cur ? "true" : "false");
+  });
+}
+function openForm(cafe, opts){
+  opts = opts || {};
+  pendingWishConvert = null;
+  editingId = cafe ? cafe.id : null;
+  draftPhotos = cafe ? (photoCache[cafe.id] || []).slice() : [];
+  $("formTitle").innerHTML = cafe ? 'Editar <span>'+esc(cafe.name)+'</span>' : 'Nueva <span>cafetería</span>';
+  $("fName").value = cafe ? (cafe.name||"") : "";
+  $("fLoc").value  = cafe ? (cafe.location||"") : "";
+  $("fInsta").value = cafe ? (cafe.instagram || "") : "";
+  $("visitRows").innerHTML = "";
+  const visits = cafe ? (cafe.visits||[]).slice() : [];
+  if (visits.length) visits.forEach(v=>addVisitRow(v));
+  else addVisitRow();
+  if (opts.addVisit) addVisitRow();
+  renderThumbs();
+  $("ovForm").classList.add("open");
+  document.body.style.overflow = "hidden";
+  setTimeout(()=>{
+    if (opts.addVisit){
+      const rows = $("visitRows").querySelectorAll(".visit-row");
+      const last = rows[rows.length-1];
+      if (last) last.querySelector("input[type=text]").focus();
+    }else if (!cafe){ $("fName").focus(); }
+  }, 60);
+}
+function closeForm(){
+  $("ovForm").classList.remove("open");
+  document.body.style.overflow = "";
+  pendingWishConvert = null;
+}
+function switchTab(user){
+  const isB = user === "brian";
+  $("paneB").hidden = !isB;
+  $("paneR").hidden = isB;
+  $("tabB").classList.toggle("on-b", isB);
+  $("tabR").classList.toggle("on-r", !isB);
+  $("tabB").setAttribute("aria-selected", isB ? "true" : "false");
+  $("tabR").setAttribute("aria-selected", !isB ? "true" : "false");
+}
+async function submitForm(){
+  const name = $("fName").value.trim();
+  if (!name){ toastMsg("⚠️ Poné el nombre de la cafetería"); $("fName").focus(); return; }
+  const instagram = normalizeUrl($("fInsta").value);
+  if (instagram === null){
+    toastMsg("⚠️ El link de Instagram no parece válido");
+    $("fInsta").focus();
+    return;
+  }
+  const data = {
+    name,
+    location: $("fLoc").value.trim(),
+    instagram,
+    visits: collectVisits()
+  };
+  let id;
+  if (editingId){
+    id = editingId;
+    const i = state.cafes.findIndex(c => c.id === editingId);
+    if (i > -1) state.cafes[i] = { ...state.cafes[i], ...data };
+    toastMsg("✨ Cambios guardados");
+  }else{
+    id = uid();
+    state.cafes.push({ id, createdAt: Date.now(), ratings: emptyRatings(), notes: {brian:"", rocio:""}, ...data });
+    if (pendingWishConvert){
+      state.wishlist = state.wishlist.filter(w => w.id !== pendingWishConvert);
+      pendingWishConvert = null;
+      toastMsg("✨ De la wishlist a la realidad — tocá ⭐ cuando la puntúen");
+    }else{
+      toastMsg("☕ ¡Agregada! Tocá ⭐ en la card cuando quieran puntuarla");
+    }
+  }
+  await saveState();
+  await savePhotos(id, draftPhotos);
+  closeForm();
+  render();
+}
+
+/* ============ PUNTUAR (flujo aparte) ============ */
+let ratingId = null;
+function openRate(cafe){
+  ratingId = cafe.id;
+  draftRatings = emptyRatings();
+  for (const u of USERS){
+    const src = (cafe.ratings && cafe.ratings[u.key]) || {};
+    for (const c of CATS) draftRatings[u.key][c.key] = Number(src[c.key]) || 0;
+  }
+  $("notes-brian").value = (cafe.notes && cafe.notes.brian) || "";
+  $("notes-rocio").value = (cafe.notes && cafe.notes.rocio) || "";
+  $("rateTitle").innerHTML = 'Puntuar <span>'+esc(cafe.name)+'</span>';
+  switchTab("brian");
+  paintStars();
+  $("ovRate").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeRate(){
+  $("ovRate").classList.remove("open");
+  document.body.style.overflow = "";
+  ratingId = null;
+}
+async function submitRate(){
+  const c = state.cafes.find(x => x.id === ratingId);
+  if (!c){ closeRate(); return; }
+  c.ratings = JSON.parse(JSON.stringify(draftRatings));
+  c.notes = { brian: $("notes-brian").value.trim(), rocio: $("notes-rocio").value.trim() };
+  await saveState();
+  closeRate();
+  render();
+  toastMsg("⭐ Puntajes guardados");
+}
+
+/* ============ DELETE ============ */
+function askDelete(id){
+  const c = state.cafes.find(x => x.id === id);
+  if (!c) return;
+  pendingDeleteId = id;
+  $("delName").textContent = '"'+c.name+'" se borra para los dos (con sus fotos y visitas) y no se puede recuperar.';
+  $("ovDel").classList.add("open");
+}
+async function confirmDelete(){
+  const id = pendingDeleteId;
+  state.cafes = state.cafes.filter(c => c.id !== id);
+  pendingDeleteId = null;
+  $("ovDel").classList.remove("open");
+  await saveState();
+  await deletePhotoKey(id);
+  render();
+  toastMsg("🗑️ Cafetería eliminada");
+}
+
+/* ============ MÚSICA (generativa, Web Audio) ============ */
+const music = {
+  ctx: null, master: null, mode: "off",
+  padTimer: null, chimeTimer: null, balladTimer: null, flaTimer: null, pianoTimer: null, jazzTimer: null,
+  chordIdx: 0, balladBar: 0, flaBar: 0, pianoBar: 0, jazzBar: 0, noiseBuf: null,
+  chords: [
+    [261.63, 329.63, 392.00, 493.88],
+    [220.00, 261.63, 329.63, 493.88],
+    [174.61, 261.63, 349.23, 440.00],
+    [196.00, 293.66, 392.00, 440.00]
+  ],
+  sparkleNotes: [1046.5, 1174.7, 1318.5, 1568.0, 1760.0, 2093.0, 2349.3, 2637.0]
+};
+
+/* "Balada de los faroles" — composición ORIGINAL en espíritu de balada Disney:
+   vals lento en Do mayor, 3/4 a 66bpm, arpa arpegiada + melodía cantábile.
+   (No es la melodía de "I See the Light": esa es obra registrada de A. Menken.) */
+const BALLAD = {
+  beatMs: 60000/66,          // 66 bpm
+  beatsPerBar: 3,
+  // arpegios de arpa por acorde (6 corcheas por compás) + bajo
+  arps: {
+    C: [130.81,196.00,261.63,329.63,392.00,329.63], Cb:65.41,
+    G: [196.00,246.94,293.66,392.00,493.88,392.00], Gb:98.00,
+    Am:[110.00,164.81,220.00,261.63,329.63,261.63], Amb:55.00,
+    F: [174.61,261.63,349.23,440.00,523.25,440.00], Fb:87.31,
+    Em:[164.81,246.94,329.63,392.00,493.88,392.00], Emb:82.41,
+    Dm:[146.83,220.00,293.66,349.23,440.00,349.23], Dmb:73.42
+  },
+  bars: ["C","G","Am","F","C","F","G","C","Am","Em","F","C","Dm","G","C","C"],
+  // melodía original: [frecuencia, duración en tiempos] — 0 = silencio
+  melody: [
+    [[329.63,1],[392.00,1],[523.25,1]],           // E4 G4 C5
+    [[493.88,2],[392.00,1]],                      // B4··  G4
+    [[440.00,1],[493.88,.5],[440.00,.5],[329.63,1]], // A4 B4 A4 E4
+    [[349.23,2],[440.00,1]],                      // F4··  A4
+    [[392.00,1],[329.63,1],[261.63,1]],           // G4 E4 C4
+    [[440.00,1.5],[349.23,.5],[440.00,1]],        // A4·  F4 A4
+    [[587.33,1],[493.88,1],[392.00,1]],           // D5 B4 G4
+    [[523.25,3]],                                 // C5···
+    [[659.25,1],[523.25,1],[440.00,1]],           // E5 C5 A4
+    [[493.88,2],[329.63,1]],                      // B4··  E4
+    [[440.00,1],[523.25,1],[349.23,1]],           // A4 C5 F4
+    [[392.00,2],[329.63,1]],                      // G4··  E4
+    [[349.23,1],[440.00,1],[587.33,1]],           // F4 A4 D5
+    [[493.88,1.5],[392.00,.5],[293.66,1]],        // B4·  G4 D4
+    [[329.63,1],[392.00,1],[493.88,1]],           // E4 G4 B4
+    [[523.25,2],[0,1]]                            // C5·· (respiro)
+  ]
+};
+
+function musicSupported(){
+  return typeof window !== "undefined" && (window.AudioContext || window.webkitAudioContext);
+}
+function musicInit(){
+  if (music.ctx) return true;
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return false;
+  music.ctx = new AC();
+  music.master = music.ctx.createGain();
+  music.master.gain.value = 0;
+  const comp = music.ctx.createDynamicsCompressor();
+  music.master.connect(comp);
+  comp.connect(music.ctx.destination);
+  return true;
+}
+
+/* --- modo 1: ambiente --- */
+function playPadChord(){
+  if (music.mode !== "ambient" || !music.ctx) return;
+  const ctx = music.ctx, now = ctx.currentTime;
+  const freqs = music.chords[music.chordIdx % music.chords.length];
+  music.chordIdx++;
+  const DUR = 9, FADE = 3.5;
+  for (const f of freqs){
+    for (const detune of [-4, 3]){
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      const filt = ctx.createBiquadFilter();
+      osc.type = "triangle";
+      osc.frequency.value = f;
+      osc.detune.value = detune;
+      filt.type = "lowpass";
+      filt.frequency.value = 900;
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.linearRampToValueAtTime(0.028, now + FADE);
+      g.gain.setValueAtTime(0.028, now + DUR - FADE);
+      g.gain.linearRampToValueAtTime(0.0001, now + DUR);
+      osc.connect(filt); filt.connect(g); g.connect(music.master);
+      osc.start(now);
+      osc.stop(now + DUR + 0.1);
+    }
+  }
+}
+function playSparkle(){
+  if (music.mode !== "ambient" || !music.ctx) return;
+  const ctx = music.ctx, now = ctx.currentTime;
+  const f = music.sparkleNotes[Math.floor(Math.random()*music.sparkleNotes.length)];
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = "sine";
+  osc.frequency.value = f;
+  const vol = 0.02 + Math.random()*0.025;
+  g.gain.setValueAtTime(0.0001, now);
+  g.gain.exponentialRampToValueAtTime(vol, now + 0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001, now + 1.6);
+  osc.connect(g); g.connect(music.master);
+  osc.start(now);
+  osc.stop(now + 1.8);
+  scheduleSparkle();
+}
+function scheduleSparkle(){
+  clearTimeout(music.chimeTimer);
+  music.chimeTimer = setTimeout(playSparkle, 900 + Math.random()*2600);
+}
+
+/* --- modo 2: balada --- */
+function harpNote(f, t, dur, vol){
+  const ctx = music.ctx;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  const filt = ctx.createBiquadFilter();
+  osc.type = "triangle";
+  osc.frequency.value = f;
+  filt.type = "lowpass";
+  filt.frequency.value = 2200;
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(vol, t + 0.015);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  osc.connect(filt); filt.connect(g); g.connect(music.master);
+  osc.start(t);
+  osc.stop(t + dur + 0.1);
+}
+function leadNote(f, t, durS){
+  const ctx = music.ctx;
+  const g = ctx.createGain();
+  const filt = ctx.createBiquadFilter();
+  filt.type = "lowpass";
+  filt.frequency.value = 1600;
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.linearRampToValueAtTime(0.05, t + 0.06);
+  g.gain.setValueAtTime(0.05, t + Math.max(durS - 0.25, 0.07));
+  g.gain.linearRampToValueAtTime(0.0001, t + durS);
+  for (const [type, det] of [["sine",0],["triangle",5]]){
+    const osc = ctx.createOscillator();
+    osc.type = type;
+    osc.frequency.value = f;
+    osc.detune.value = det;
+    osc.connect(filt);
+    osc.start(t);
+    osc.stop(t + durS + 0.1);
+  }
+  filt.connect(g); g.connect(music.master);
+}
+function playBalladBar(){
+  if (music.mode !== "ballad" || !music.ctx) return;
+  const ctx = music.ctx;
+  const beatS = BALLAD.beatMs/1000;
+  const barS = beatS * BALLAD.beatsPerBar;
+  const now = ctx.currentTime + 0.05;
+  const bar = music.balladBar % BALLAD.bars.length;
+  const chord = BALLAD.bars[bar];
+  // bajo suave (redonda del compás)
+  harpNote(BALLAD.arps[chord+"b"], now, barS, 0.035);
+  // arpa: 6 corcheas
+  const arp = BALLAD.arps[chord];
+  for (let i=0;i<6;i++){
+    harpNote(arp[i], now + i*(barS/6), 1.15, 0.028);
+  }
+  // melodía
+  let off = 0;
+  for (const [f, d] of BALLAD.melody[bar]){
+    if (f > 0) leadNote(f, now + off*beatS, d*beatS*0.96);
+    off += d;
+  }
+  music.balladBar++;
+}
+
+/* --- modo 3: flamenco pop (composición ORIGINAL inspirada en el género;
+       no reproduce ninguna canción registrada) --- */
+const FLA = {
+  beatMs: 60000/98,             // 98 bpm
+  bars: ["Am","G","F","E"],     // cadencia andaluza
+  bass:  { Am:110.00, G:98.00, F:87.31, E:82.41 },
+  chord: { Am:[220.00,261.63,329.63], G:[196.00,246.94,293.66], F:[174.61,220.00,261.63], E:[164.81,207.65,246.94] },
+  kickSteps: [0,4,8,12],
+  clapSteps: [3,6,11,14],       // dembow
+  bassSteps: [0,3,6,8,11,14],
+  stabSteps: [2,10],
+  // riffs por compás (frigio dominante): [paso, frecuencia, duración en pasos]
+  riffs: [
+    [],
+    [[8,523.25,2],[10,493.88,2],[12,440.00,4]],
+    [],
+    [[4,659.25,2],[6,698.46,2],[8,659.25,2],[10,587.33,2],[12,523.25,2],[14,493.88,2]]
+  ]
+};
+function noiseBuffer(){
+  if (music.noiseBuf) return music.noiseBuf;
+  const ctx = music.ctx;
+  const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.3), ctx.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i=0;i<d.length;i++) d[i] = Math.random()*2-1;
+  music.noiseBuf = buf;
+  return buf;
+}
+function drumKick(t){
+  const ctx = music.ctx;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(150, t);
+  osc.frequency.exponentialRampToValueAtTime(48, t + 0.11);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(0.10, t + 0.008);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.20);
+  osc.connect(g); g.connect(music.master);
+  osc.start(t); osc.stop(t + 0.24);
+}
+function palma(t){
+  const ctx = music.ctx;
+  for (const off of [0, 0.02]){  // doble golpe = palma
+    const src = ctx.createBufferSource();
+    src.buffer = noiseBuffer();
+    const bp = ctx.createBiquadFilter();
+    bp.type = "bandpass";
+    bp.frequency.value = 1900;
+    bp.Q.value = 1.1;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t + off);
+    g.gain.exponentialRampToValueAtTime(off ? 0.028 : 0.05, t + off + 0.004);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + off + 0.09);
+    src.connect(bp); bp.connect(g); g.connect(music.master);
+    src.start(t + off); src.stop(t + off + 0.12);
+  }
+}
+function flaBass(f, t){
+  const ctx = music.ctx;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  const lp = ctx.createBiquadFilter();
+  osc.type = "sawtooth";
+  osc.frequency.value = f;
+  lp.type = "lowpass";
+  lp.frequency.value = 320;
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(0.055, t + 0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.23);
+  osc.connect(lp); lp.connect(g); g.connect(music.master);
+  osc.start(t); osc.stop(t + 0.26);
+}
+function flaStab(freqs, t){
+  const ctx = music.ctx;
+  const lp = ctx.createBiquadFilter();
+  lp.type = "lowpass"; lp.frequency.value = 1300;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(0.024, t + 0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.26);
+  for (const f of freqs){
+    const osc = ctx.createOscillator();
+    osc.type = "sawtooth";
+    osc.frequency.value = f;
+    osc.connect(lp);
+    osc.start(t); osc.stop(t + 0.3);
+  }
+  lp.connect(g); g.connect(music.master);
+}
+function playFlaBar(){
+  if (music.mode !== "flamenco" || !music.ctx) return;
+  const ctx = music.ctx;
+  const stepS = FLA.beatMs / 4000;         // 16 pasos por compás
+  const now = ctx.currentTime + 0.05;
+  const bar = music.flaBar % FLA.bars.length;
+  const chord = FLA.bars[bar];
+  for (const s of FLA.kickSteps) drumKick(now + s*stepS);
+  for (const s of FLA.clapSteps) palma(now + s*stepS);
+  for (const s of FLA.bassSteps) flaBass(FLA.bass[chord], now + s*stepS);
+  for (const s of FLA.stabSteps) flaStab(FLA.chord[chord], now + s*stepS);
+  for (const [s, f, d] of FLA.riffs[bar]) leadNote(f, now + s*stepS, d*stepS*0.95);
+  music.flaBar++;
+}
+
+/* --- modo 4: piano de medianoche (composición ORIGINAL) ---
+   4/4 a 70bpm en Do mayor; mano izquierda en pedal, melodía suspendida con novenas. */
+const PIANO = {
+  beatMs: 60000/70,
+  chords: {
+    C:  { r2:65.41, arp:[130.81,196.00,329.63] },
+    Am: { r2:55.00, arp:[110.00,164.81,261.63] },
+    F:  { r2:87.31, arp:[174.61,220.00,261.63] },
+    G:  { r2:98.00, arp:[196.00,246.94,293.66] },
+    Dm: { r2:73.42, arp:[146.83,220.00,261.63] }
+  },
+  bars: ["C","Am","F","G","C","F","Dm","G"],
+  // melodía: [tiempo, frecuencia, duración en tiempos]
+  melody: [
+    [[1,523.25,1],[2,587.33,1],[3,659.25,1]],
+    [[0.5,659.25,1.5],[2,493.88,2]],
+    [[1,440.00,1],[2,523.25,.5],[2.5,440.00,.5],[3,349.23,1]],
+    [[0,392.00,2],[2.5,587.33,1.5]],
+    [[1,659.25,.5],[1.5,587.33,.5],[2,523.25,2]],
+    [[0.5,440.00,1],[2,349.23,2]],
+    [[1,587.33,1],[2,523.25,1],[3,440.00,1]],
+    [[0,493.88,2],[2,392.00,2]]
+  ]
+};
+function pianoNote(f, t, dur, vol){
+  const ctx = music.ctx;
+  const lp = ctx.createBiquadFilter();
+  lp.type = "lowpass"; lp.frequency.value = 2600;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(vol, t + 0.006);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  for (const [mult, amp, type] of [[1,1,"triangle"],[2,0.45,"sine"],[3,0.16,"sine"]]){
+    const osc = ctx.createOscillator();
+    osc.type = type;
+    osc.frequency.value = f * mult;
+    const pg = ctx.createGain();
+    pg.gain.value = amp;
+    osc.connect(pg); pg.connect(lp);
+    osc.start(t); osc.stop(t + dur + 0.1);
+  }
+  lp.connect(g); g.connect(music.master);
+}
+function playPianoBar(){
+  if (music.mode !== "piano" || !music.ctx) return;
+  const beatS = PIANO.beatMs/1000;
+  const now = music.ctx.currentTime + 0.05;
+  const bar = music.pianoBar % PIANO.bars.length;
+  const ch = PIANO.chords[PIANO.bars[bar]];
+  // mano izquierda con "pedal": bajo largo + arpegio superpuesto
+  pianoNote(ch.r2, now, beatS*3.9, 0.045);
+  ch.arp.forEach((f,i)=>pianoNote(f, now + (i+1)*beatS, beatS*2.3, 0.03));
+  for (const [b, f, d] of PIANO.melody[bar]) pianoNote(f, now + b*beatS, d*beatS + 0.6, 0.05);
+  music.pianoBar++;
+}
+
+/* --- modo 5: jazz de trasnoche (composición ORIGINAL) ---
+   trío en swing a 122bpm: walking bass, ride con swing y comping de piano (ii-V y turnaround). */
+const JAZZ = {
+  beatMs: 60000/122,
+  swing: 0.66,
+  voicings: {
+    Cmaj7:[329.63,392.00,493.88], A7:[277.18,329.63,392.00], Dm7:[349.23,440.00,523.25],
+    G7:[246.94,349.23,440.00], Em7:[329.63,392.00,493.88]
+  },
+  bars: [
+    { ch:"Cmaj7", bass:[65.41,82.41,98.00,110.00],  comp:[1.66,3],    mel:[[2,392.00,.6],[2.66,440.00,.6]] },
+    { ch:"A7",    bass:[55.00,69.30,82.41,98.00],   comp:[0.66,2.66], mel:[[0,493.88,1.3]] },
+    { ch:"Dm7",   bass:[73.42,87.31,110.00,123.47], comp:[1.66,3],    mel:[[1,523.25,.6],[1.66,440.00,.6],[2.66,349.23,1]] },
+    { ch:"G7",    bass:[98.00,87.31,82.41,73.42],   comp:[0.66,2],    mel:[] },
+    { ch:"Em7",   bass:[82.41,98.00,123.47,110.00], comp:[1.66,3],    mel:[[2,493.88,.6],[3,587.33,.9]] },
+    { ch:"A7",    bass:[55.00,82.41,69.30,98.00],   comp:[0.66,2.66], mel:[[0.66,554.37,.6],[1.66,523.25,1]] },
+    { ch:"Dm7",   bass:[73.42,110.00,87.31,73.42],  comp:[1.66,3],    mel:[[2,440.00,.6],[2.66,392.00,.6]] },
+    { ch:"G7",    bass:[98.00,123.47,116.54,110.00],comp:[0.66,2],    mel:[[1,493.88,.6],[1.66,392.00,1.2]] }
+  ],
+  ride:[0,1,1.66,2,3,3.66],
+  hat:[1,3]
+};
+function jazzBass(f, t){
+  const ctx = music.ctx;
+  const osc = ctx.createOscillator();
+  const lp = ctx.createBiquadFilter();
+  const g = ctx.createGain();
+  osc.type = "triangle";
+  osc.frequency.value = f;
+  lp.type = "lowpass"; lp.frequency.value = 260;
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(0.065, t + 0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+  osc.connect(lp); lp.connect(g); g.connect(music.master);
+  osc.start(t); osc.stop(t + 0.55);
+}
+function cymbal(t, freq, vol, dur){
+  const ctx = music.ctx;
+  const src = ctx.createBufferSource();
+  src.buffer = noiseBuffer();
+  const bp = ctx.createBiquadFilter();
+  bp.type = "bandpass"; bp.frequency.value = freq; bp.Q.value = 2.5;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(vol, t + 0.004);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  src.connect(bp); bp.connect(g); g.connect(music.master);
+  src.start(t); src.stop(t + dur + 0.03);
+}
+function playJazzBar(){
+  if (music.mode !== "jazz" || !music.ctx) return;
+  const beatS = JAZZ.beatMs/1000;
+  const now = music.ctx.currentTime + 0.05;
+  const bar = JAZZ.bars[music.jazzBar % JAZZ.bars.length];
+  bar.bass.forEach((f,i)=>jazzBass(f, now + i*beatS));
+  for (const b of JAZZ.ride) cymbal(now + b*beatS, 5200, 0.028, 0.09);
+  for (const b of JAZZ.hat)  cymbal(now + b*beatS, 3000, 0.014, 0.05);
+  const v = JAZZ.voicings[bar.ch];
+  for (const slot of bar.comp) for (const f of v) pianoNote(f, now + slot*beatS, 0.4, 0.028);
+  for (const [b, f, d] of bar.mel) pianoNote(f, now + b*beatS, d*beatS + 0.25, 0.045);
+  music.jazzBar++;
+}
+
+/* --- control --- */
+function stopSchedulers(){
+  clearInterval(music.padTimer); music.padTimer = null;
+  clearTimeout(music.chimeTimer); music.chimeTimer = null;
+  clearInterval(music.balladTimer); music.balladTimer = null;
+  clearInterval(music.flaTimer); music.flaTimer = null;
+  clearInterval(music.pianoTimer); music.pianoTimer = null;
+  clearInterval(music.jazzTimer); music.jazzTimer = null;
+}
+async function musicSetMode(mode){
+  if (mode === "off"){ musicStop(); paintMusicMenu(); return; }
+  if (!musicInit()){ toastMsg("⚠️ Este navegador no soporta audio"); return; }
+  try{ if (music.ctx.state === "suspended") await music.ctx.resume(); }catch(e){}
+  stopSchedulers();
+  music.mode = mode;
+  music.flaBar = 0; music.pianoBar = 0; music.jazzBar = 0;
+  const now = music.ctx.currentTime;
+  music.master.gain.cancelScheduledValues(now);
+  music.master.gain.setValueAtTime(music.master.gain.value, now);
+  music.master.gain.linearRampToValueAtTime(1, now + 1.5);
+  if (mode === "ambient"){
+    playPadChord();
+    music.padTimer = setInterval(playPadChord, 8000);
+    scheduleSparkle();
+    toastMsg("✨ Ambiente mágico");
+  }else if (mode === "ballad"){
+    music.balladBar = 0;
+    playBalladBar();
+    music.balladTimer = setInterval(playBalladBar, BALLAD.beatMs * BALLAD.beatsPerBar);
+    toastMsg("🏮 Balada de los faroles");
+  }else if (mode === "flamenco"){
+    playFlaBar();
+    music.flaTimer = setInterval(playFlaBar, FLA.beatMs * 4);
+    toastMsg("💃 Flamenco pop — inspirado, no copiado 😉");
+  }else if (mode === "piano"){
+    playPianoBar();
+    music.pianoTimer = setInterval(playPianoBar, PIANO.beatMs * 4);
+    toastMsg("🎹 Piano de medianoche");
+  }else{
+    playJazzBar();
+    music.jazzTimer = setInterval(playJazzBar, JAZZ.beatMs * 4);
+    toastMsg("🎷 Jazz de trasnoche");
+  }
+  $("btnMusic").classList.add("on");
+  $("btnMusic").setAttribute("aria-pressed","true");
+  $("btnMusic").textContent = ({ballad:"🏮", flamenco:"💃", piano:"🎹", jazz:"🎷"})[mode] || "🎵";
+  paintMusicMenu();
+}
+function musicStop(){
+  music.mode = "off";
+  stopSchedulers();
+  if (music.ctx && music.master){
+    const now = music.ctx.currentTime;
+    music.master.gain.cancelScheduledValues(now);
+    music.master.gain.setValueAtTime(music.master.gain.value, now);
+    music.master.gain.linearRampToValueAtTime(0, now + 0.8);
+  }
+  $("btnMusic").classList.remove("on");
+  $("btnMusic").setAttribute("aria-pressed","false");
+  $("btnMusic").textContent = "🎵";
+}
+function paintMusicMenu(){
+  $("musicMenu").querySelectorAll("button").forEach(b=>{
+    b.classList.toggle("on", b.dataset.mode === music.mode || (music.mode === "off" && b.dataset.mode === "off"));
+  });
+}
+function toggleMusicMenu(){
+  const m = $("musicMenu");
+  m.hidden = !m.hidden;
+  if (!m.hidden) paintMusicMenu();
+}
+
+/* ============ EXPORT / BACKUP ============ */
+let pendingRestore = null;
+
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+function xmlEsc(s){
+  return String(s ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[m]));
+}
+function colLetter(i){
+  let s = "";
+  i++;
+  while (i > 0){ const m = (i-1) % 26; s = String.fromCharCode(65+m) + s; i = Math.floor((i-1)/26); }
+  return s;
+}
+function sheetXml(rows, widths){
+  let cols = "";
+  if (widths && widths.length){
+    cols = "<cols>" + widths.map((w,i)=>'<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+w+'" customWidth="1"/>').join("") + "</cols>";
+  }
+  let body = "";
+  rows.forEach((row, ri)=>{
+    let cells = "";
+    row.forEach((v, ci)=>{
+      if (v === "" || v === null || v === undefined) return;
+      const ref = colLetter(ci) + (ri+1);
+      if (typeof v === "number" && isFinite(v)){
+        cells += '<c r="'+ref+'"><v>'+v+'</v></c>';
+      }else{
+        cells += '<c r="'+ref+'" t="inlineStr"><is><t xml:space="preserve">'+xmlEsc(v)+'</t></is></c>';
+      }
+    });
+    body += '<row r="'+(ri+1)+'">'+cells+'</row>';
+  });
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    + '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+    + cols + '<sheetData>'+body+'</sheetData></worksheet>';
+}
+/* mini-ZIP (modo almacenado, con CRC32) — suficiente para un .xlsx válido */
+const CRC_TABLE = (()=>{
+  const t = new Uint32Array(256);
+  for (let n=0;n<256;n++){
+    let c = n;
+    for (let k=0;k<8;k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+    t[n] = c >>> 0;
+  }
+  return t;
+})();
+function crc32(bytes){
+  let c = 0xFFFFFFFF;
+  for (let i=0;i<bytes.length;i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function zipStore(files){
+  const enc = new TextEncoder();
+  const parts = [], central = [];
+  let offset = 0;
+  const DOSDATE = ((2026-1980)<<9) | (8<<5) | 25, DOSTIME = 12<<11;
+  for (const f of files){
+    const nameB = enc.encode(f.name);
+    const data = (f.data instanceof Uint8Array) ? f.data : enc.encode(f.data);
+    const crc = crc32(data);
+    const lh = new DataView(new ArrayBuffer(30));
+    lh.setUint32(0, 0x04034b50, true);
+    lh.setUint16(4, 20, true);
+    lh.setUint16(6, 0x0800, true);          // nombres UTF-8
+    lh.setUint16(8, 0, true);               // sin compresión
+    lh.setUint16(10, DOSTIME, true);
+    lh.setUint16(12, DOSDATE, true);
+    lh.setUint32(14, crc, true);
+    lh.setUint32(18, data.length, true);
+    lh.setUint32(22, data.length, true);
+    lh.setUint16(26, nameB.length, true);
+    lh.setUint16(28, 0, true);
+    parts.push(new Uint8Array(lh.buffer), nameB, data);
+    const ch = new DataView(new ArrayBuffer(46));
+    ch.setUint32(0, 0x02014b50, true);
+    ch.setUint16(4, 20, true);
+    ch.setUint16(6, 20, true);
+    ch.setUint16(8, 0x0800, true);
+    ch.setUint16(10, 0, true);
+    ch.setUint16(12, DOSTIME, true);
+    ch.setUint16(14, DOSDATE, true);
+    ch.setUint32(16, crc, true);
+    ch.setUint32(20, data.length, true);
+    ch.setUint32(24, data.length, true);
+    ch.setUint16(28, nameB.length, true);
+    ch.setUint32(42, offset, true);
+    central.push(new Uint8Array(ch.buffer), nameB);
+    offset += 30 + nameB.length + data.length;
+  }
+  const centralSize = central.reduce((a,p)=>a+p.length,0);
+  const eocd = new DataView(new ArrayBuffer(22));
+  eocd.setUint32(0, 0x06054b50, true);
+  eocd.setUint16(8, files.length, true);
+  eocd.setUint16(10, files.length, true);
+  eocd.setUint32(12, centralSize, true);
+  eocd.setUint32(16, offset, true);
+  const total = offset + centralSize + 22;
+  const out = new Uint8Array(total);
+  let pos = 0;
+  for (const p of parts.concat(central, [new Uint8Array(eocd.buffer)])){ out.set(p, pos); pos += p.length; }
+  return out;
+}
+function num(n){ return n ? Math.round(n*100)/100 : ""; }
+function buildXlsx(){
+  const head1 = ["Cafetería","Zona","Visitas","Última visita","Último pedido"];
+  for (const u of USERS) for (const c of CATS) head1.push(c.label+" ("+u.name+")");
+  head1.push("Prom. Brian","Prom. Rocío","Prom. General","Notas Brian","Notas Rocío","Instagram","Google Maps");
+  const rows1 = [head1];
+  for (const c of state.cafes.slice().sort((a,b)=>cafeAvg(b)-cafeAvg(a))){
+    const lv = lastVisit(c);
+    const r = [c.name, c.location||"", (c.visits||[]).length, lv&&lv.date? lv.date:"", lv? (lv.pedido||""):""];
+    for (const u of USERS) for (const cat of CATS){
+      const v = ((c.ratings||{})[u.key]||{})[cat.key];
+      r.push(v ? Number(v) : "");
+    }
+    r.push(num(userAvg(c,"brian")), num(userAvg(c,"rocio")), num(cafeAvg(c)),
+           (c.notes&&c.notes.brian)||"", (c.notes&&c.notes.rocio)||"", c.instagram||"", gmapsUrl(c));
+    rows1.push(r);
+  }
+  const rows2 = [["Cafetería","Fecha","Qué pedimos"]];
+  for (const c of state.cafes) for (const v of (c.visits||[])) rows2.push([c.name, v.date||"", v.pedido||""]);
+  const rows3 = [["Cafetería","Zona","Propuesta por","Nota","Instagram"]];
+  for (const w of state.wishlist) rows3.push([w.name, w.location||"", (BY_LABEL[w.by]||"✨ Los dos").replace(/^\S+\s/,""), w.note||"", w.instagram||""]);
+
+  const w1 = [26,16,9,13,34, 12,12,12,12,12, 12,12,12,12,12, 11,11,12, 30,30,34,40];
+  const sheets = [
+    { name:"Cafeterías", xml: sheetXml(rows1, w1) },
+    { name:"Visitas",    xml: sheetXml(rows2, [26,13,50]) },
+    { name:"Wishlist",   xml: sheetXml(rows3, [26,16,14,40,34]) }
+  ];
+  const NS = "http://schemas.openxmlformats.org/";
+  const contentTypes = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    + '<Types xmlns="'+NS+'package/2006/content-types">'
+    + '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+    + '<Default Extension="xml" ContentType="application/xml"/>'
+    + '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
+    + sheets.map((s,i)=>'<Override PartName="/xl/worksheets/sheet'+(i+1)+'.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>').join("")
+    + '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
+    + '</Types>';
+  const rootRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    + '<Relationships xmlns="'+NS+'package/2006/relationships">'
+    + '<Relationship Id="rId1" Type="'+NS+'officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>';
+  const workbook = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    + '<workbook xmlns="'+NS+'spreadsheetml/2006/main" xmlns:r="'+NS+'officeDocument/2006/relationships"><sheets>'
+    + sheets.map((s,i)=>'<sheet name="'+xmlEsc(s.name)+'" sheetId="'+(i+1)+'" r:id="rId'+(i+1)+'"/>').join("")
+    + '</sheets></workbook>';
+  const wbRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    + '<Relationships xmlns="'+NS+'package/2006/relationships">'
+    + sheets.map((s,i)=>'<Relationship Id="rId'+(i+1)+'" Type="'+NS+'officeDocument/2006/relationships/worksheet" Target="worksheets/sheet'+(i+1)+'.xml"/>').join("")
+    + '<Relationship Id="rId'+(sheets.length+1)+'" Type="'+NS+'officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>';
+  const styles = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    + '<styleSheet xmlns="'+NS+'spreadsheetml/2006/main">'
+    + '<fonts count="1"><font><sz val="11"/><name val="Calibri"/></font></fonts>'
+    + '<fills count="1"><fill><patternFill patternType="none"/></fill></fills>'
+    + '<borders count="1"><border/></borders>'
+    + '<cellStyleXfs count="1"><xf/></cellStyleXfs>'
+    + '<cellXfs count="1"><xf/></cellXfs></styleSheet>';
+  return zipStore([
+    { name:"[Content_Types].xml", data: contentTypes },
+    { name:"_rels/.rels", data: rootRels },
+    { name:"xl/workbook.xml", data: workbook },
+    { name:"xl/_rels/workbook.xml.rels", data: wbRels },
+    { name:"xl/styles.xml", data: styles },
+    ...sheets.map((s,i)=>({ name:"xl/worksheets/sheet"+(i+1)+".xml", data: s.xml }))
+  ]);
+}
+function downloadFile(filename, content, mime){
+  try{
+    const blob = new Blob([content], {type: mime});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 4000);
+    return true;
+  }catch(e){
+    toastMsg("⚠️ No se pudo generar la descarga");
+    return false;
+  }
+}
+function exportXlsx(){
+  if (!state.cafes.length && !state.wishlist.length){ toastMsg("Todavía no hay nada para exportar ☕"); return; }
+  try{
+    const bytes = buildXlsx();
+    if (downloadFile("cafeterias-brian-y-rocio-"+todayStr()+".xlsx", bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+      toastMsg("📊 Excel exportado con 3 hojas: Cafeterías, Visitas y Wishlist");
+  }catch(e){ toastMsg("⚠️ No se pudo armar el Excel"); }
+}
+function exportBackup(){
+  const payload = {
+    app: "cafeterias-brian-rocio",
+    version: 3,
+    exportedAt: new Date().toISOString(),
+    state: state,
+    photos: photoCache
+  };
+  if (downloadFile("backup-cafeterias-"+todayStr()+".json", JSON.stringify(payload), "application/json"))
+    toastMsg("🛟 Backup descargado — guardalo en un lugar seguro");
+}
+function parseBackup(text){
+  let obj;
+  try{ obj = JSON.parse(text); }catch(e){ return null; }
+  // formato propio o un state pelado
+  const st = (obj && obj.state) ? obj.state : obj;
+  if (!st || !Array.isArray(st.cafes)) return null;
+  if (!Array.isArray(st.wishlist)) st.wishlist = [];
+  const photos = (obj && obj.photos && typeof obj.photos === "object") ? obj.photos : {};
+  return { state: st, photos };
+}
+function stageRestore(text, sourceLabel){
+  const parsed = parseBackup(text);
+  if (!parsed){ toastMsg("⚠️ Eso no parece un backup válido"+(sourceLabel? " ("+sourceLabel+")":"")); return false; }
+  pendingRestore = parsed;
+  const nFotos = Object.values(parsed.photos).reduce((a,arr)=>a+(Array.isArray(arr)?arr.length:0),0);
+  $("restInfo").textContent = "Contiene "+parsed.state.cafes.length+" cafeterías, "
+    + parsed.state.cafes.reduce((a,c)=>a+((c.visits||[]).length),0) + " visitas, "
+    + parsed.state.wishlist.length + " en wishlist y " + nFotos + " fotos.";
+  $("ovRestore").classList.add("open");
+  return true;
+}
+function askRestore(file){
+  if (file && /\.xlsx$/i.test(file.name||"")){
+    toastMsg("⚠️ Ese es el Excel 😅 — el backup es el archivo .json");
+    return;
+  }
+  const reader = new FileReader();
+  reader.onerror = ()=>toastMsg("⚠️ No se pudo leer el archivo");
+  reader.onload = ()=>stageRestore(reader.result, "archivo");
+  reader.readAsText(file);
+}
+async function confirmRestore(){
+  if (!pendingRestore) return;
+  const oldIds = Object.keys(photoCache);
+  state = pendingRestore.state;
+  photoCache = {};
+  migrate();
+  await saveState();
+  // escribir fotos nuevas
+  for (const id of Object.keys(pendingRestore.photos)){
+    const arr = pendingRestore.photos[id];
+    if (Array.isArray(arr) && arr.length) await savePhotos(id, arr);
+  }
+  // limpiar claves de fotos que ya no corresponden
+  for (const id of oldIds){
+    if (!photoCache[id]) await deletePhotoKey(id);
+  }
+  pendingRestore = null;
+  $("ovRestore").classList.remove("open");
+  render();
+  toastMsg("📥 Backup restaurado con éxito");
+}
+
+/* ============ PANTALLA COMPLETA ============ */
+function fullSupported(){
+  const el = document.documentElement;
+  return !!(el.requestFullscreen || el.webkitRequestFullscreen);
+}
+function isFull(){
+  return !!(document.fullscreenElement || document.webkitFullscreenElement);
+}
+async function toggleFull(){
+  if (!fullSupported()){
+    toastMsg("⚠️ Este navegador no permite pantalla completa (en iPhone: compartir → 'Agregar a inicio' la abre como app)");
+    return;
+  }
+  try{
+    if (isFull()){
+      await (document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen());
+    }else{
+      const el = document.documentElement;
+      await (el.requestFullscreen ? el.requestFullscreen() : el.webkitRequestFullscreen());
+    }
+  }catch(e){ toastMsg("⚠️ No se pudo cambiar a pantalla completa"); }
+}
+function paintFullBtn(){
+  const on = isFull();
+  $("btnFull").classList.toggle("on", on);
+  $("btnFull").textContent = on ? "🗗" : "⛶";
+  $("btnFull").title = on ? "Salir de pantalla completa" : "Pantalla completa";
+}
+
+/* ============ EVENTOS ============ */
+function bind(){
+  $("btnFull").addEventListener("click", toggleFull);
+  document.addEventListener("fullscreenchange", paintFullBtn);
+  document.addEventListener("webkitfullscreenchange", paintFullBtn);
+  $("btnNew").addEventListener("click", ()=>openForm(null));
+  $("btnEmptyNew").addEventListener("click", ()=>openForm(null));
+  $("btnEmptyImport").addEventListener("click", ()=>{ $("pasteBox").value=""; $("ovPaste").classList.add("open"); setTimeout(()=>$("pasteBox").focus(),60); });
+  $("xForm").addEventListener("click", closeForm);
+  $("btnCancel").addEventListener("click", closeForm);
+  $("btnSave").addEventListener("click", submitForm);
+  $("tabB").addEventListener("click", ()=>switchTab("brian"));
+  $("tabR").addEventListener("click", ()=>switchTab("rocio"));
+  $("q").addEventListener("input", render);
+  $("sort").addEventListener("change", render);
+  $("btnDelNo").addEventListener("click", ()=>{ pendingDeleteId=null; $("ovDel").classList.remove("open"); });
+  $("btnDelYes").addEventListener("click", confirmDelete);
+  $("btnAddVisit").addEventListener("click", ()=>addVisitRow());
+  $("fileInput").addEventListener("change", (e)=>{ handleFiles(e.target.files); e.target.value=""; });
+
+  // vista lista / mapa / wishlist
+  $("segList").addEventListener("click", ()=>setView("list"));
+  $("segMap").addEventListener("click", ()=>setView("map"));
+  $("segWish").addEventListener("click", ()=>setView("wish"));
+
+  // wishlist
+  $("btnNewWish").addEventListener("click", ()=>openWishModal(null));
+  $("btnEmptyWish").addEventListener("click", ()=>openWishModal(null));
+  $("xWish").addEventListener("click", closeWishModal);
+  $("btnWishCancel").addEventListener("click", closeWishModal);
+  $("btnWishSave").addEventListener("click", saveWish);
+  $("byPicker").addEventListener("click", (e)=>{
+    const b = e.target.closest("button[data-by]");
+    if (b){ wishBy = b.dataset.by; paintByPicker(); }
+  });
+  $("ovWish").addEventListener("mousedown", (e)=>{ if (e.target === $("ovWish")) closeWishModal(); });
+  $("wlGrid").addEventListener("click", (e)=>{
+    const v = e.target.closest("[data-wvisit]");
+    if (v){ wishToVisit(v.dataset.wvisit); return; }
+    const ed = e.target.closest("[data-wedit]");
+    if (ed){ const w = state.wishlist.find(x=>x.id===ed.dataset.wedit); if (w) openWishModal(w); return; }
+    const del = e.target.closest("[data-wdel]");
+    if (del){
+      state.wishlist = state.wishlist.filter(w=>w.id!==del.dataset.wdel);
+      saveState(); render(); toastMsg("💫 Sacada de la wishlist");
+    }
+  });
+
+  // ruleta
+  $("btnRuleta").addEventListener("click", openRuleta);
+  // música
+  $("btnMusic").addEventListener("click", (e)=>{ e.stopPropagation(); $("dataMenu").hidden = true; toggleMusicMenu(); });
+  $("musicMenu").addEventListener("click", (e)=>{
+    const b = e.target.closest("button[data-mode]");
+    if (!b) return;
+    $("musicMenu").hidden = true;
+    musicSetMode(b.dataset.mode);
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  });
+  document.addEventListener("mousedown", (e)=>{
+    if (!$("musicMenu").hidden && !e.target.closest("#musicWrap")) $("musicMenu").hidden = true;
+    if (!$("dataMenu").hidden && !e.target.closest("#dataWrap")) $("dataMenu").hidden = true;
+  });
+
+  // export / backup / restore
+  $("btnData").addEventListener("click", (e)=>{ e.stopPropagation(); $("dataMenu").hidden = !$("dataMenu").hidden; $("musicMenu").hidden = true; });
+  $("btnExportCsv").addEventListener("click", (e)=>{ $("dataMenu").hidden = true; exportXlsx(); e.target.blur(); });
+  $("btnBackup").addEventListener("click", (e)=>{ $("dataMenu").hidden = true; exportBackup(); e.target.blur(); });
+  $("btnRestoreAsk").addEventListener("click", ()=>{ $("dataMenu").hidden = true; $("restoreInput").click(); });
+  $("btnPasteAsk").addEventListener("click", ()=>{ $("dataMenu").hidden = true; $("pasteBox").value=""; $("ovPaste").classList.add("open"); setTimeout(()=>$("pasteBox").focus(),60); });
+  $("btnCloudAsk").addEventListener("click", ()=>{
+    $("dataMenu").hidden = true;
+    try{
+      const saved = JSON.parse(localStorage.getItem(FB_LS_KEY) || "null");
+      if (saved){ $("fbConfigBox").value = JSON.stringify(saved.config, null, 2); $("fbRoomBox").value = saved.room; }
+    }catch(e){}
+    $("ovCloud").classList.add("open");
+  });
+  $("xCloud").addEventListener("click", ()=>$("ovCloud").classList.remove("open"));
+  $("btnCloudCancel").addEventListener("click", ()=>$("ovCloud").classList.remove("open"));
+  $("ovCloud").addEventListener("mousedown", (e)=>{ if (e.target === $("ovCloud")) $("ovCloud").classList.remove("open"); });
+  $("btnCloudOff").addEventListener("click", ()=>{ disconnectCloud(); $("ovCloud").classList.remove("open"); });
+  $("btnCloudGo").addEventListener("click", async ()=>{
+    $("btnCloudGo").disabled = true;
+    const ok = await connectCloud($("fbConfigBox").value, $("fbRoomBox").value);
+    $("btnCloudGo").disabled = false;
+    if (ok) $("ovCloud").classList.remove("open");
+  });
+  $("xPaste").addEventListener("click", ()=>$("ovPaste").classList.remove("open"));
+  $("btnPasteCancel").addEventListener("click", ()=>$("ovPaste").classList.remove("open"));
+  $("ovPaste").addEventListener("mousedown", (e)=>{ if (e.target === $("ovPaste")) $("ovPaste").classList.remove("open"); });
+  $("btnPasteFile").addEventListener("click", ()=>{ $("ovPaste").classList.remove("open"); $("restoreInput").click(); });
+  $("btnPasteGo").addEventListener("click", ()=>{
+    const txt = $("pasteBox").value.trim();
+    if (!txt){ toastMsg("⚠️ El cuadro está vacío — pegá el texto del backup"); return; }
+    if (stageRestore(txt, "texto pegado")) $("ovPaste").classList.remove("open");
+  });
+  $("restoreInput").addEventListener("change", (e)=>{
+    if (e.target.files && e.target.files[0]) askRestore(e.target.files[0]);
+    e.target.value = "";
+  });
+  $("btnRestNo").addEventListener("click", ()=>{ pendingRestore = null; $("ovRestore").classList.remove("open"); });
+  $("btnRestYes").addEventListener("click", confirmRestore);
+  $("ovRestore").addEventListener("mousedown", (e)=>{ if (e.target === $("ovRestore")){ pendingRestore = null; $("ovRestore").classList.remove("open"); } });
+  document.addEventListener("visibilitychange", ()=>{
+    if (!music.ctx) return;
+    if (document.hidden){ try{ music.ctx.suspend(); }catch(e){} }
+    else if (music.mode !== "off"){ try{ music.ctx.resume(); }catch(e){} }
+  });
+  $("xRuleta").addEventListener("click", closeRuleta);
+  $("btnRuletaClose").addEventListener("click", closeRuleta);
+  $("btnSpin").addEventListener("click", spin);
+  $("ruletaSrc").addEventListener("click", (e)=>{
+    const b = e.target.closest("button[data-src]");
+    if (!b) return;
+    ruletaSrc = b.dataset.src;
+    $("ruletaSrc").querySelectorAll("button").forEach(x=>x.classList.toggle("on", x===b));
+  });
+  $("ruletaActions").addEventListener("click", (e)=>{
+    const rv = e.target.closest("[data-rvisit]");
+    if (rv){ closeRuleta(); wishToVisit(rv.dataset.rvisit); return; }
+    const rn = e.target.closest("[data-rnewvisit]");
+    if (rn){
+      const c = state.cafes.find(x=>x.id===rn.dataset.rnewvisit);
+      if (c){ closeRuleta(); openForm(c, {addVisit:true}); }
+    }
+  });
+  $("ovRuleta").addEventListener("mousedown", (e)=>{ if (e.target === $("ovRuleta")) closeRuleta(); });
+
+  // modal de puntuar
+  $("xRate").addEventListener("click", closeRate);
+  $("btnRateCancel").addEventListener("click", closeRate);
+  $("btnRateSave").addEventListener("click", submitRate);
+  $("ovRate").addEventListener("mousedown", (e)=>{ if (e.target === $("ovRate")) closeRate(); });
+  $("ovRate").addEventListener("click", (e)=>{
+    const star = e.target.closest(".star");
+    if (!star) return;
+    const {user, cat, val} = star.dataset;
+    const v = Number(val);
+    draftRatings[user][cat] = (draftRatings[user][cat] === v) ? 0 : v;
+    paintStars();
+  });
+
+  // delegación dentro del modal de info: quitar visita, fotos
+  $("ovForm").addEventListener("click", (e)=>{
+    const rm = e.target.closest(".visit-row .rm");
+    if (rm){ rm.closest(".visit-row").remove(); return; }
+    if (e.target.closest("#btnAddPhoto")){ $("fileInput").click(); return; }
+    const rp = e.target.closest("[data-rmphoto]");
+    if (rp){ draftPhotos.splice(Number(rp.dataset.rmphoto),1); renderThumbs(); return; }
+  });
+
+  $("ovForm").addEventListener("mousedown", (e)=>{ if (e.target === $("ovForm")) closeForm(); });
+  $("ovDel").addEventListener("mousedown", (e)=>{ if (e.target === $("ovDel")){ pendingDeleteId=null; $("ovDel").classList.remove("open"); } });
+
+  // grid: editar / visita / borrar
+  $("hlRow").addEventListener("click", (e)=>{
+    const b = e.target.closest("[data-hlrate]");
+    if (b){ const c = state.cafes.find(x=>x.id===b.dataset.hlrate); if (c) openRate(c); }
+  });
+  $("grid").addEventListener("click", (e)=>{
+    const rt = e.target.closest("[data-rate]");
+    if (rt){ const c = state.cafes.find(x=>x.id===rt.dataset.rate); if (c) openRate(c); return; }
+    const ed = e.target.closest("[data-edit]");
+    if (ed){ const c = state.cafes.find(x=>x.id===ed.dataset.edit); if (c) openForm(c); return; }
+    const vs = e.target.closest("[data-visit]");
+    if (vs){ const c = state.cafes.find(x=>x.id===vs.dataset.visit); if (c) openForm(c, {addVisit:true}); return; }
+    const del = e.target.closest("[data-del]");
+    if (del) askDelete(del.dataset.del);
+  });
+
+  // mapa: pins y popup
+  $("starmap").addEventListener("click", (e)=>{
+    if (mapDragged){ mapDragged = false; return; }
+    if (e.target.closest("#ambaMarker")){ setMapMode("amba"); return; }
+    const pe = e.target.closest("[data-popedit]");
+    if (pe){ const c = state.cafes.find(x=>x.id===pe.dataset.popedit); if (c) openForm(c); return; }
+    if (e.target.closest(".map-pop")) return;
+    const pin = e.target.closest(".pin");
+    if (pin){ openMapPop(pin.dataset.pin, pin); return; }
+    if (activePop){ activePop.remove(); activePop = null; }
+  });
+
+  document.addEventListener("keydown", (e)=>{
+    if (e.key === "Escape"){
+      if (!$("musicMenu").hidden || !$("dataMenu").hidden){
+        $("musicMenu").hidden = true; $("dataMenu").hidden = true;
+        if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+      }
+      else if ($("ovDel").classList.contains("open")){ pendingDeleteId=null; $("ovDel").classList.remove("open"); }
+      else if ($("ovRestore").classList.contains("open")){ pendingRestore=null; $("ovRestore").classList.remove("open"); }
+      else if ($("ovPaste").classList.contains("open")) $("ovPaste").classList.remove("open");
+      else if ($("ovCloud").classList.contains("open")) $("ovCloud").classList.remove("open");
+      else if ($("ovRate").classList.contains("open")) closeRate();
+      else if ($("ovWish").classList.contains("open")) closeWishModal();
+      else if ($("ovRuleta").classList.contains("open")) closeRuleta();
+      else if ($("ovForm").classList.contains("open")) closeForm();
+      else if (activePop){ activePop.remove(); activePop = null; }
+    }
+  });
+}
+
+function setView(v){
+  $("listView").classList.toggle("off", v !== "list");
+  $("mapView").classList.toggle("on", v === "map");
+  $("wishView").classList.toggle("on", v === "wish");
+  if (v === "map") setTimeout(applyMapView, 0);
+  const tabs = { list: $("segList"), map: $("segMap"), wish: $("segWish") };
+  for (const k in tabs){
+    tabs[k].classList.toggle("on", k === v);
+    tabs[k].setAttribute("aria-selected", k === v ? "true" : "false");
+  }
+}
+
+/* ============ FRASES + LUCIÉRNAGAS + DESTACADOS ============ */
+const QUOTES = [
+  "cada taza cuenta una <b>historia</b> ☕",
+  "el mejor plan siempre empieza con <b>café</b>",
+  "hoy puede ser el día de encontrar <b>la favorita</b> ✨",
+  "primero el café, después <b>el mundo</b>",
+  "coleccionamos cafeterías como otros coleccionan <b>estrellas</b>",
+  "un flat white y todo se <b>acomoda</b>",
+  "la magia existe: viene en <b>pocillo</b> 🪄",
+  "descubrir una cafetería nueva cuenta como <b>aventura</b>"
+];
+function seedTagline(){
+  const day = Math.floor(Date.now() / 86400000);
+  $("tagline").innerHTML = "“" + QUOTES[day % QUOTES.length] + "”";
+}
+function seedFireflies(){
+  const box = document.createElement("div");
+  box.className = "fireflies";
+  let h = "";
+  for (let i=0;i<14;i++){
+    const cls = ["","v","m"][i % 3];
+    const st = "left:"+(Math.random()*100).toFixed(1)+"%;top:"+(18+Math.random()*80).toFixed(1)+"%;"
+      + "--d:"+(13+Math.random()*14).toFixed(1)+"s;--dl:-"+(Math.random()*14).toFixed(1)+"s;"
+      + "--x1:"+((Math.random()*120-60)|0)+"px;--y1:"+((-30-Math.random()*80)|0)+"px;"
+      + "--x2:"+((Math.random()*120-60)|0)+"px;--y2:"+((-70-Math.random()*90)|0)+"px;"
+      + "--x3:"+((Math.random()*120-60)|0)+"px;--y3:"+((-20-Math.random()*70)|0)+"px";
+    h += '<i class="'+cls+'" style="'+st+'"></i>';
+  }
+  box.innerHTML = h;
+  document.body.appendChild(box);
+}
+function renderHighlights(){
+  const row = $("hlRow");
+  if (!state.cafes.length){ row.hidden = true; return; }
+  const items = [];
+  // última visita
+  let last = null, lastDate = "";
+  for (const c of state.cafes) for (const v of (c.visits||[])){
+    if (v.date && v.date > lastDate){ lastDate = v.date; last = c; }
+  }
+  if (last) items.push('<div class="hl"><span class="ic">🕰️</span><div><b>'+esc(last.name)+'</b><span>última visita · '+esc(fmtDate(lastDate))+'</span></div></div>');
+  // pendientes de puntuar
+  const pend = state.cafes.filter(c => cafeAvg(c) === 0);
+  if (pend.length){
+    items.push('<div class="hl"><span class="ic">⭐</span><div><b>'+pend.length+' por puntuar</b><span>'+esc(pend[0].name)+(pend.length>1?" y más":"")+'</span></div>'
+      + '<button data-hlrate="'+pend[0].id+'">Puntuar</button></div>');
+  }
+  // próxima de la wishlist
+  if (state.wishlist.length){
+    const w = state.wishlist[Math.floor(Date.now()/86400000) % state.wishlist.length];
+    items.push('<div class="hl"><span class="ic">💫</span><div><b>'+esc(w.name)+'</b><span>les espera en la wishlist'+(w.location? ' · '+esc(w.location):'')+'</span></div></div>');
+  }
+  row.innerHTML = items.join("");
+  row.hidden = items.length === 0;
+}
+
+/* ============ ESTRELLITAS DEL FONDO ============ */
+function seedBgStars(){
+  const box = $("starsBg");
+  let h = "";
+  for (let i=0;i<26;i++){
+    const x = Math.random()*100, y = Math.random()*80, d = (Math.random()*3).toFixed(2);
+    h += '<i style="left:'+x+'%;top:'+y+'%;animation-delay:'+d+'s"></i>';
+  }
+  box.innerHTML = h;
+}
+
+/* ============ INIT ============ */
+(async function init(){
+  buildRatePanes();
+  seedBgStars();
+  seedTagline();
+  seedFireflies();
+  buildStaticMap();
+  const dl = $("barriosList");
+  const names = Object.keys(MAPS.amba.places.caba)
+    .concat(Object.keys(MAPS.amba.places.gba), Object.keys(MAPS.prov.places.prov))
+    .sort((a,b)=>a.localeCompare(b,"es"));
+  dl.innerHTML = names.map(n=>'<option value="'+esc(n)+'"></option>').join("");
+  bind();
+  bindMap();
+  if (WEB_MODE){ $("webModeTag").hidden = false; $("btnCloudAsk").hidden = false; }
+  await loadState();
+  render();
+  autoConnectCloud();
+})();
+</script>
+</body>
+</html>
